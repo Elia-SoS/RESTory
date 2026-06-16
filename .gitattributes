@@ -1,0 +1,5 @@
+Dump[[:space:]]Databases/Document[[:space:]]DB[[:space:]]Finali/RESTory.Books.json filter=lfs diff=lfs merge=lfs -text
+Dump[[:space:]]Databases/Document[[:space:]]DB[[:space:]]Finali/RESTory.Users.json filter=lfs diff=lfs merge=lfs -text
+Dump[[:space:]]Databases/Document[[:space:]]DB[[:space:]]Finali/RESTory.Interactions.json filter=lfs diff=lfs merge=lfs -text
+Dump[[:space:]]Databases/Graph[[:space:]]Finali/neo4j.dump filter=lfs diff=lfs merge=lfs -text
+Dump[[:space:]]Databases/Key-Value[[:space:]]Finali/KV_bash_import.txt filter=lfs diff=lfs merge=lfs -text
