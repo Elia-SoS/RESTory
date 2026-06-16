@@ -28,12 +28,14 @@ it\unipi\lsmd\restory\ResToryApplication.class
 it\unipi\lsmd\restory\services\RedisService.class
 it\unipi\lsmd\restory\models\PossessesRelationship.class
 it\unipi\lsmd\restory\services\InteractionService.class
+it\unipi\lsmd\restory\models\UserDTO.class
 it\unipi\lsmd\restory\models\PolarizingBookStats.class
 it\unipi\lsmd\restory\config\MongoConfig$DateToLocalDateTimeConverter.class
 it\unipi\lsmd\restory\models\ReviewedRelationship.class
 it\unipi\lsmd\restory\models\HubAndAuthorityStats.class
 it\unipi\lsmd\restory\models\MostAbandonedBookStats.class
 it\unipi\lsmd\restory\models\Neo4jUser.class
+it\unipi\lsmd\restory\models\LoginRequest.class
 it\unipi\lsmd\restory\controllers\FollowController.class
 it\unipi\lsmd\restory\config\MongoConfig$DateToLocalDateConverter.class
 it\unipi\lsmd\restory\services\Neo4jUserService.class
