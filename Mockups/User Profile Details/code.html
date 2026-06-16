@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RESTory - User Profile</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1a2230",
+                        "text-main": "#0d121b",
+                        "text-secondary": "#4c669a",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-main dark:text-white transition-colors duration-200">
+<header class="sticky top-0 z-50 w-full border-b border-[#e7ebf3] dark:border-gray-800 bg-surface-light dark:bg-surface-dark px-4 lg:px-10 py-3 shadow-sm">
+<div class="mx-auto flex max-w-[1280px] items-center justify-between">
+<div class="flex items-center gap-8">
+<a class="flex items-center gap-3 text-primary" href="#">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">auto_stories</span>
+</div>
+<h2 class="text-text-main dark:text-white text-xl font-bold tracking-tight">RESTory</h2>
+</a>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-text-secondary dark:text-gray-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Home</a>
+<a class="text-text-secondary dark:text-gray-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Explore</a>
+<a class="text-text-main dark:text-white text-sm font-medium" href="#">Profile</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-4 md:gap-6">
+<div class="hidden sm:flex max-w-md w-full items-center rounded-lg bg-[#e7ebf3] dark:bg-gray-800 px-3 h-10">
+<span class="material-symbols-outlined text-text-secondary dark:text-gray-400 text-[20px]">search</span>
+<input class="w-full bg-transparent border-none text-sm px-3 text-text-main dark:text-white placeholder:text-text-secondary dark:placeholder:text-gray-500 focus:ring-0" placeholder="Search books, authors, users..."/>
+</div>
+<div class="flex items-center gap-3">
+<button class="relative p-2 text-text-secondary dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 rounded-full bg-red-500 border border-white dark:border-surface-dark"></span>
+</button>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-9 border-2 border-white dark:border-surface-dark shadow-sm cursor-pointer" data-alt="User profile picture placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBpitUA6OWtIR1QlOx9fvnniTGlZPKfGMaClnoWl6Yyx0q44BdGq9E6WUqXYiLFEF3OrnpCIXNbtUTfT3ljxhz3joHbyfdQz7JfvfkIYTDJiaZuhHV5Kn2cAaCQ0gmugZEocH0jG9h2v2QOjv0SLUBFfMsywojJZvSdfQSeCo4V3E94KfONxWYmUwvQzP23itRZr76JkxPg7udiUwle_bODe1Uj5C5xt9rbhRG99PdZeduU6l4hlNkzzoNBGqE_HBDMpNvLANCtlnw");'></div>
+</div>
+</div>
+</div>
+</header>
+<main class="mx-auto max-w-[1280px] px-4 py-8 lg:px-8">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<aside class="lg:col-span-4 xl:col-span-3 flex flex-col gap-6 sticky top-24">
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-[#e7ebf3] dark:border-gray-800 p-6 flex flex-col items-center text-center relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-primary/10 to-transparent"></div>
+<div class="relative z-10 mb-4">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-32 border-4 border-white dark:border-surface-dark shadow-md" data-alt="Marco Rossi profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAUldIvbgz2QGNgIMd2FZg4hX1OoyVhq3LpSTXyGiLX9mCCWCnzGLqnvSdYz9DNBQbTK5F3bWh0sV7G58K8PQlCDCe9XNUEIyHFN9XDb5oHdjg2NdpXJF5dg4rPwmPF58bM2q1gpOJM53I41baBCWzLp2xhRj5avCSjDCLndVVPDZ3u-_eJaR6yyTt7lwyf_ciuoglNETY_5lBEuWzXRd07kqTES82BK0gl7uy32MW5RsWVekK2Mazaf5czw_DAVGou6ZjyBH8SWRA");'></div>
+<div class="absolute bottom-1 right-1 bg-green-500 size-4 rounded-full border-2 border-white dark:border-surface-dark" title="Online"></div>
+</div>
+<h1 class="text-2xl font-bold text-text-main dark:text-white leading-tight">Marco Rossi</h1>
+<p class="text-text-secondary dark:text-gray-400 text-sm mb-4">@marcoreads</p>
+<p class="text-text-main dark:text-gray-300 text-sm leading-relaxed mb-6">
+                        Sci-fi and historical thriller enthusiast. Always on the lookout for the next great story. 📚✨
+                    </p>
+<div class="flex items-center justify-center gap-2 text-text-secondary dark:text-gray-400 text-xs mb-6 w-full">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span>Milan, Italy</span>
+</div>
+<span class="text-gray-300 dark:text-gray-600">•</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">calendar_month</span>
+<span>Joined 2021</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3 w-full">
+<button class="flex items-center justify-center gap-2 h-10 px-4 bg-primary hover:bg-blue-700 text-white text-sm font-bold rounded-lg transition-colors w-full shadow-sm shadow-blue-500/30">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+                            Follow
+                        </button>
+<button class="flex items-center justify-center gap-2 h-10 px-4 bg-white dark:bg-gray-800 border border-[#cfd7e7] dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 text-text-main dark:text-white text-sm font-bold rounded-lg transition-colors w-full">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+                            Message
+                        </button>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-[#e7ebf3] dark:border-gray-800 p-4">
+<h3 class="text-xs font-bold text-text-secondary dark:text-gray-400 uppercase tracking-wider mb-4 px-2">STATISTICS</h3>
+<div class="grid grid-cols-3 gap-2 divide-x divide-gray-100 dark:divide-gray-700">
+<div class="flex flex-col items-center px-2">
+<span class="text-xl font-bold text-text-main dark:text-white">142</span>
+<span class="text-xs text-text-secondary dark:text-gray-400">Books</span>
+</div>
+<div class="flex flex-col items-center px-2">
+<span class="text-xl font-bold text-text-main dark:text-white">34</span>
+<span class="text-xs text-text-secondary dark:text-gray-400">Reviews</span>
+</div>
+<div class="flex flex-col items-center px-2">
+<span class="text-xl font-bold text-text-main dark:text-white">850</span>
+<span class="text-xs text-text-secondary dark:text-gray-400">Followers</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-[#e7ebf3] dark:border-gray-800 p-4 flex flex-col gap-3">
+<a class="flex items-center gap-3 text-sm text-text-secondary dark:text-gray-400 hover:text-primary transition-colors px-2 py-1" href="#">
+<span class="material-symbols-outlined text-[20px]">link</span>
+<span>goodreads.com/marcorossi</span>
+</a>
+<a class="flex items-center gap-3 text-sm text-text-secondary dark:text-gray-400 hover:text-primary transition-colors px-2 py-1" href="#">
+<span class="material-symbols-outlined text-[20px]">public</span>
+<span>marcorossi.it</span>
+</a>
+</div>
+</aside>
+<div class="lg:col-span-8 xl:col-span-9 flex flex-col gap-8">
+<div class="border-b border-[#cfd7e7] dark:border-gray-700">
+<nav aria-label="Tabs" class="flex gap-8 overflow-x-auto">
+<a class="border-b-[3px] border-primary pb-3 pt-2 text-sm font-bold text-primary flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[20px]">library_books</span>
+                            Library
+                        </a>
+<a class="border-b-[3px] border-transparent pb-3 pt-2 text-sm font-medium text-text-secondary dark:text-gray-400 hover:text-text-main dark:hover:text-white hover:border-gray-300 transition-colors flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[20px]">rate_review</span>
+                            Reviews
+                        </a>
+<a class="border-b-[3px] border-transparent pb-3 pt-2 text-sm font-medium text-text-secondary dark:text-gray-400 hover:text-text-main dark:hover:text-white hover:border-gray-300 transition-colors flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[20px]">bookmarks</span>
+                            Lists
+                        </a>
+<a class="border-b-[3px] border-transparent pb-3 pt-2 text-sm font-medium text-text-secondary dark:text-gray-400 hover:text-text-main dark:hover:text-white hover:border-gray-300 transition-colors flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[20px]">history</span>
+                            Activity
+                        </a>
+</nav>
+</div>
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+<h2 class="text-xl font-bold text-text-main dark:text-white">Library</h2>
+<div class="flex items-center gap-3 w-full sm:w-auto">
+<div class="relative flex-1 sm:flex-none">
+<select class="block w-full rounded-lg border-none bg-[#e7ebf3] dark:bg-gray-800 py-2 pl-3 pr-10 text-sm text-text-main dark:text-white focus:ring-2 focus:ring-primary cursor-pointer">
+<option>Recently added</option>
+<option>Highest rated</option>
+<option>Alphabetical order</option>
+</select>
+</div>
+<div class="flex bg-[#e7ebf3] dark:bg-gray-800 rounded-lg p-1 gap-1">
+<button class="p-1.5 rounded bg-white dark:bg-gray-600 shadow-sm text-text-main dark:text-white">
+<span class="material-symbols-outlined text-[20px] block">grid_view</span>
+</button>
+<button class="p-1.5 rounded text-text-secondary dark:text-gray-400 hover:bg-white/50 dark:hover:bg-gray-700 transition-colors">
+<span class="material-symbols-outlined text-[20px] block">view_list</span>
+</button>
+</div>
+</div>
+</div>
+<div class="bg-gradient-to-r from-primary/10 to-transparent dark:from-primary/20 rounded-xl p-4 sm:p-6 flex flex-col sm:flex-row gap-6 items-start">
+<div class="shrink-0 relative group">
+<div class="bg-center bg-no-repeat bg-cover rounded-lg w-24 h-36 sm:w-28 sm:h-40 shadow-lg bg-gray-100 dark:bg-gray-800" data-alt="Cover of the book Project Hail Mary" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAX7pgBSV8tkrb2PFJJd3v-m8FmDd5KLBCiFTz0sozG5ovlAlUmPhop09XJfPG7YhA2FdqSlVIdboagxvW2ocz4jJKTkKerSl-CDLYi07mWRHmaYE3V9RSXfGN9Oseql1cya3e-ZIIz8-gGrPcx0OqRhObkmP2T1w-DO8eTKLgDuZebot8FHACOfRHpLpGlpw_8JuOzfxHnbBXM40JYHYY1BXa_bsZgSKSI3FC71t-6hIRvxFthBKmamPljEkZiZeZ_m-kv3gIT2_s");'></div>
+<div class="absolute inset-0 bg-black/40 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<button class="text-white p-2 rounded-full bg-black/20 hover:bg-black/40 backdrop-blur-sm">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col gap-2 flex-1">
+<div class="flex items-center gap-2 mb-1">
+<span class="bg-primary/10 text-primary dark:text-blue-300 text-xs font-bold px-2 py-1 rounded-full uppercase tracking-wide">Currently Reading</span>
+<span class="text-text-secondary dark:text-gray-400 text-xs">Updated 2 hours ago</span>
+</div>
+<h3 class="text-xl font-bold text-text-main dark:text-white line-clamp-1">Project Hail Mary</h3>
+<p class="text-text-secondary dark:text-gray-300 font-medium">by Andy Weir</p>
+</div>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-4 gap-y-8">
+<div class="group flex flex-col gap-3">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-md">
+<div class="absolute inset-0 bg-center bg-no-repeat bg-cover" data-alt="Dune book cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuASEpQrD50sQ7TZWoKc0KqeqFEPKYMujsVhx7SFdZIgQSf6THadLToV3sd7VsFt_ntEM-IAK4k4_hbYpU9PkcymWsakYIQ5j5DGtMVE12SBe6Jy115zcqCaV4p4HbyTZaFqlj2CvGMHGe7nL2DYnlGb40OEl4W0baTPnB44oBlz3G2RTBfNiPIfPCAsNHC3Thha_F7dKxi_TFgKWcuxLn9exVlNw0z982pB41FDh_3Sc0yj5aXQ2515OBpXSUFd4IIxeHoAhepey20");'></div>
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center gap-2 p-4">
+<div class="flex text-yellow-400 gap-0.5">
+<span class="material-symbols-outlined text-[20px] fill-current">star</span>
+<span class="material-symbols-outlined text-[20px] fill-current">star</span>
+<span class="material-symbols-outlined text-[20px] fill-current">star</span>
+<span class="material-symbols-outlined text-[20px] fill-current">star</span>
+<span class="material-symbols-outlined text-[20px] fill-current">star_half</span>
+</div>
+<span class="text-white text-sm font-bold">4.5/5</span>
+</div>
+<div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="bg-white text-gray-800 p-1.5 rounded-full hover:bg-primary hover:text-white transition-colors shadow-lg">
+<span class="material-symbols-outlined text-[18px] block">bookmark_add</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col gap-0.5">
+<h4 class="font-bold text-text-main dark:text-white leading-tight truncate group-hover:text-primary transition-colors">Dune</h4>
+<p class="text-sm text-text-secondary dark:text-gray-400 truncate">Frank Herbert</p>
+</div>
+</div>
+<div class="group flex flex-col gap-3">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-md">
+<div class="absolute inset-0 bg-center bg-no-repeat bg-cover" data-alt="1984 book cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCezHCThAwC8ABbDGI5_Nu__FyGMR-meF2PeaE9emJTrf_YV_pdw0JQtutbdDnt7ndzwURz0NC-cAItAU5riVOgzVJEj4CTc2CMyhgVW-np4j7QEZ3D8fbrRltMW8I6Yqa1BIrv1Q3Obc67RD3BQNMsWKVCZJs57n2l1_RAwUcZOWAqHnaIIl4KI6VOQ-SQrwfpzzFDNTige9WLimAPQSbO5dn9XSkYuF5lCJDBPTHxxHJaG8Bv8GcEAqpKBLvTPvhWDETAkZVeOcU");'></div>
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center gap-2 p-4">
+<div class="flex text-yellow-400 gap-0.5">
+<span class="material-symbols-outlined text-[20px] fill-current">star</span>
+<span class="material-symbols-outlined text-[20px] fill-current">star</span>
+<span class="material-symbols-outlined text-[20px] fill-current">star</span>
+<span class="material-symbols-outlined text-[20px] fill-current">star</span>
+<span class="material-symbols-outlined text-[20px] fill-current">star</span>
+</div>
+<span class="text-white text-sm font-bold">5/5</span>
+</div>
+</div>
+<div class="flex flex-col gap-0.5">
+<h4 class="font-bold text-text-main dark:text-white leading-tight truncate group-hover:text-primary transition-colors">1984</h4>
+<p class="text-sm text-text-secondary dark:text-gray-400 truncate">George Orwell</p>
+</div>
+</div>
+<div class="group flex flex-col gap-3">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-md">
+<div class="absolute inset-0 bg-center bg-no-repeat bg-cover" data-alt="Foundation book cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCK_Fey_wIHI46R9B4FVClbp4v3aufPYE_ZDs3yCXP9r2OYbmYDuEL11IMUfbOHousKTgh1v7Bq3Unl0GqzsWKgfx6cZ_eXY0rjwkmIpjAbAbnrPwTKe_DFWuoKm7dIl-X4mOpWMmxmlAHzOHXoII-dCkwWU1AJMSLJSzSbT3TGDZtzXJvNzzlS1oBgY1ZYmtz232v9qHdjRhhDCeAdsxoL1fF3syYsLk7jYArFaOvjW9dXpp3pmv07hVegw9FRkytWG-hY9LcedIE");'></div>
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center gap-2 p-4">
+<div class="flex text-yellow-400 gap-0.5">
+<span class="material-symbols-outlined text-[20px] fill-current">star</span>
+<span class="material-symbols-outlined text-[20px] fill-current">star</span>
+<span class="material-symbols-outlined text-[20px] fill-current">star</span>
+<span class="material-symbols-outlined text-[20px] fill-current">star_border</span>
+<span class="material-symbols-outlined text-[20px] fill-current">star_border</span>
+</div>
+<span class="text-white text-sm font-bold">3/5</span>
+</div>
+</div>
+<div class="flex flex-col gap-0.5">
+<h4 class="font-bold text-text-main dark:text-white leading-tight truncate group-hover:text-primary transition-colors">Foundation</h4>
+<p class="text-sm text-text-secondary dark:text-gray-400 truncate">Isaac Asimov</p>
+</div>
+</div>
+<div class="group flex flex-col gap-3">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-md">
+<div class="absolute inset-0 bg-center bg-no-repeat bg-cover" data-alt="The Hobbit book cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAbBteFu1kk5nJvLGF99ENtUwKnSFzHcg6aLeaYtCu6ond-i7OldbcxlTKW9xNNyA_dfAb-usV6GqjP9AXTx_Syg16FF74_XeOQLLd9BSGP0Z-DMt1V6T-KemZ1mVRDRsiIR-0QddH64SIOiefw8nGMf4kcTEUr9yF0zuvoXFs8q0pV13lPIMWo64MZCm1SRgWhJizxUQ5LbJvECjT28ex7ysleiu7lnmLuH1-SW8L4MHA2TUq14nTHzYu0g_oT7uiGat3ojqqqz2U");'></div>
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center gap-2 p-4">
+<div class="flex text-yellow-400 gap-0.5">
+<span class="material-symbols-outlined text-[20px] fill-current">star</span>
+<span class="material-symbols-outlined text-[20px] fill-current">star</span>
+<span class="material-symbols-outlined text-[20px] fill-current">star</span>
+<span class="material-symbols-outlined text-[20px] fill-current">star</span>
+<span class="material-symbols-outlined text-[20px] fill-current">star</span>
+</div>
+<span class="text-white text-sm font-bold">5/5</span>
+</div>
+</div>
+<div class="flex flex-col gap-0.5">
+<h4 class="font-bold text-text-main dark:text-white leading-tight truncate group-hover:text-primary transition-colors">The Hobbit</h4>
+<p class="text-sm text-text-secondary dark:text-gray-400 truncate">J.R.R. Tolkien</p>
+</div>
+</div>
+<div class="group flex flex-col gap-3">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-md">
+<div class="absolute inset-0 bg-center bg-no-repeat bg-cover" data-alt="Dark Matter book cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDOstcNTUbuzMd8FuDwEriX2spC6qfMaw65ng5aaGFkv3tDx0B-bE4jII6w20GJx-aBV48B2zydIQ7d-oJeTK0jdAdwhiJlOj9keUeIBnMDU9AsIjlxRBBbCHwxLaIIxUzW7ECUTvTNmWO4g49XBm3_OHiKCKS4QLf4kX-TAK7vt9GAgxb_iXiQbByzwC-XtXSNqOGQCkFfb59taS6cvh3RHCZeveeJEiDDOnqS2fCnGZ9UZCohLNfXfI9IUO211N3mP-MwPTSI8oc");'></div>
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center gap-2 p-4">
+<div class="flex text-yellow-400 gap-0.5">
+<span class="material-symbols-outlined text-[20px] fill-current">star</span>
+<span class="material-symbols-outlined text-[20px] fill-current">star</span>
+<span class="material-symbols-outlined text-[20px] fill-current">star</span>
+<span class="material-symbols-outlined text-[20px] fill-current">star</span>
+<span class="material-symbols-outlined text-[20px] fill-current">star_border</span>
+</div>
+<span class="text-white text-sm font-bold">4/5</span>
+</div>
+</div>
+<div class="flex flex-col gap-0.5">
+<h4 class="font-bold text-text-main dark:text-white leading-tight truncate group-hover:text-primary transition-colors">Dark Matter</h4>
+<p class="text-sm text-text-secondary dark:text-gray-400 truncate">Blake Crouch</p>
+</div>
+</div>
+<div class="group flex flex-col gap-3">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-md">
+<div class="absolute inset-0 bg-center bg-no-repeat bg-cover" data-alt="Abstract red book cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBKbNoSmrpH0ir-n2vZJrl_DGHfIEIc8__TkIZOH4lJdCaFKmum1M-8_QLO_qkBIagpIJEtPXFahDKXWve6yhUtK2_ZzZYU8MuKpyjMNhiDVCQTcvpY342Ejx8otbcgTlWYpNvm1wlx3u9NF1DK1-ySLtlk4j8meiS4Kv5HlJYnUsO8En-eWVzsUyS-dMxgyPmYguRER8BJJ_L6mg1bSwbNdLFxUH65BrFpseEwiMaMKI0vJCGvJOfhjm6hZW20IG749FlcSsyaNmM");'></div>
+<div class="absolute top-2 right-2">
+<span class="bg-black/50 backdrop-blur-md text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">To Read</span>
+</div>
+</div>
+<div class="flex flex-col gap-0.5">
+<h4 class="font-bold text-text-main dark:text-white leading-tight truncate group-hover:text-primary transition-colors">Red Rising</h4>
+<p class="text-sm text-text-secondary dark:text-gray-400 truncate">Pierce Brown</p>
+</div>
+</div>
+<div class="group flex flex-col gap-3">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800 shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-md">
+<div class="absolute inset-0 bg-center bg-no-repeat bg-cover" data-alt="The Silent Patient book cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAb_I5yL7H6LJ7pVzn-6YoG6S8P3AZRs-V_IqlMJp34cAIBGF0SM_qSstLM_x2X-FL3bpwORIKoEa2Sp4EjB_mMjm9oLhV79kX3Vs6ClTaUbNi9S94X8SwpsPKESAPVYMp5fhpU65C23Qyafsi7BbM3jAenwFLPcSVL0YYdBnhEGa5Stdp8qXkTY1gjDYyS2TFVHEXO-TNfoKExG1MyUK_kN-rMv1ZAWxYBMRneu1UK8as3nq7fY0SfY3IO6lPBFLHFLQ9fSO9_wrM");'></div>
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center gap-2 p-4">
+<div class="flex text-yellow-400 gap-0.5">
+<span class="material-symbols-outlined text-[20px] fill-current">star</span>
+<span class="material-symbols-outlined text-[20px] fill-current">star</span>
+<span class="material-symbols-outlined text-[20px] fill-current">star</span>
+<span class="material-symbols-outlined text-[20px] fill-current">star</span>
+<span class="material-symbols-outlined text-[20px] fill-current">star_half</span>
+</div>
+<span class="text-white text-sm font-bold">4.2/5</span>
+</div>
+</div>
+<div class="flex flex-col gap-0.5">
+<h4 class="font-bold text-text-main dark:text-white leading-tight truncate group-hover:text-primary transition-colors">The Silent Patient</h4>
+<p class="text-sm text-text-secondary dark:text-gray-400 truncate">Alex Michaelides</p>
+</div>
+</div>
+<div class="group flex flex-col gap-3">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800 shadow-sm border border-dashed border-gray-300 dark:border-gray-700 flex flex-col items-center justify-center text-text-secondary hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-4xl mb-2 opacity-50">add</span>
+<span class="text-xs font-medium">View all</span>
+</div>
+</div>
+</div>
+<div class="mt-8">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-xl font-bold text-text-main dark:text-white">Latest Reviews</h2>
+<a class="text-sm text-primary font-bold hover:underline" href="#">View all (34)</a>
+</div>
+<div class="flex flex-col gap-4">
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl p-5 border border-[#e7ebf3] dark:border-gray-800 flex gap-4 transition-transform hover:translate-x-1 duration-200">
+<div class="shrink-0 hidden sm:block">
+<div class="bg-center bg-no-repeat bg-cover rounded w-16 h-24 shadow-sm" data-alt="Book cover for The Midnight Library" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCWX4qUc-X0LFG5p---Sw70ilUD79XkLwDVAqFwXa2lmq5OxVigrZklFjFEX6Ocv4h-8g56YT-2w3MwogLUdNG4Zpo3HucqSe5nVb9pxvJ23dP1hyFbD8pA6Fa9lv6QbltYKHF-RdVOBrITrr9q1xQfWTK6okHjchFgTJcLXCJyueTIIePoCLb_CTmSzTeZrx6uBQCZtm3SaVOR6gsPBqS_AaXkT-p3FVfIASoVyVxmeqhSLrhzAG-hBSXHs1H6SgaEfhVETPIqmAM");'></div>
+</div>
+<div class="flex flex-col flex-1 gap-2">
+<div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1">
+<div>
+<h3 class="font-bold text-text-main dark:text-white text-lg">The Midnight Library</h3>
+<p class="text-xs text-text-secondary dark:text-gray-400">by Matt Haig</p>
+</div>
+<span class="text-xs text-text-secondary dark:text-gray-500 whitespace-nowrap">2 days ago</span>
+</div>
+<div class="flex text-yellow-400 gap-0.5 text-[16px]">
+<span class="material-symbols-outlined fill-current">star</span>
+<span class="material-symbols-outlined fill-current">star</span>
+<span class="material-symbols-outlined fill-current">star</span>
+<span class="material-symbols-outlined fill-current">star</span>
+<span class="material-symbols-outlined fill-current text-gray-300 dark:text-gray-600">star</span>
+</div>
+<p class="text-sm text-text-main dark:text-gray-300 leading-relaxed line-clamp-2">
+                                    A fascinating concept about life choices and regrets. Although the narrative becomes a bit predictable towards the middle, the final message is powerful and moving. Recommended for those looking for a reflective but light read.
+                                </p>
+<div class="flex items-center gap-4 mt-1">
+<button class="flex items-center gap-1 text-xs text-text-secondary dark:text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]">thumb_up</span>
+                                        12
+                                    </button>
+<button class="flex items-center gap-1 text-xs text-text-secondary dark:text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]">comment</span>
+                                        2
+                                    </button>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl p-5 border border-[#e7ebf3] dark:border-gray-800 flex gap-4 transition-transform hover:translate-x-1 duration-200">
+<div class="shrink-0 hidden sm:block">
+<div class="bg-center bg-no-repeat bg-cover rounded w-16 h-24 shadow-sm" data-alt="Book cover for Piranesi" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDRuemH29XI_tPSSasr_q2Hutqc730Qk_BQpDrabqPTnCPxPFwYeE3v7rCVH2cZSmS_uLfe5Wi3Yu_pGR6tectez-6-V_lRVUQGd7wzdDmZzb4lxaIDv0dhA1eE9UbL70Zcd3IFYickPSvihTLZkEIsy-nQ6Ec_P7Ec9o0SSdnEzoHTi9lJZFa2CaUTUZu0_ChvDAEO3ZK31OwvuPxx_74F5AAcoVsDPO_Y3eRK0BDuDX_Dd55ZDDPqrG9ssGVQ-GSCfUCydXVCUOY");'></div>
+</div>
+<div class="flex flex-col flex-1 gap-2">
+<div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1">
+<div>
+<h3 class="font-bold text-text-main dark:text-white text-lg">Piranesi</h3>
+<p class="text-xs text-text-secondary dark:text-gray-400">by Susanna Clarke</p>
+</div>
+<span class="text-xs text-text-secondary dark:text-gray-500 whitespace-nowrap">1 week ago</span>
+</div>
+<div class="flex text-yellow-400 gap-0.5 text-[16px]">
+<span class="material-symbols-outlined fill-current">star</span>
+<span class="material-symbols-outlined fill-current">star</span>
+<span class="material-symbols-outlined fill-current">star</span>
+<span class="material-symbols-outlined fill-current">star</span>
+<span class="material-symbols-outlined fill-current">star</span>
+</div>
+<p class="text-sm text-text-main dark:text-gray-300 leading-relaxed line-clamp-2">
+                                    Absolutely magical. The dreamlike atmosphere of the House and Piranesi's innocent voice captured me from the first page. A masterpiece of minimalist world-building.
+                                </p>
+<div class="flex items-center gap-4 mt-1">
+<button class="flex items-center gap-1 text-xs text-text-secondary dark:text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]">thumb_up</span>
+                                        45
+                                    </button>
+<button class="flex items-center gap-1 text-xs text-text-secondary dark:text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]">comment</span>
+                                        8
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+</body></html>

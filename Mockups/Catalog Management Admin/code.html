@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Book Management - RESTory Admin</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3b82f6", // Adjusted for better visibility in dark mode (blue-500)
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#0f172a", // Darker slate
+                        "surface-dark": "#1e293b", // Slate 800 for cards
+                        "border-dark": "#334155", // Slate 700 for borders
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-dark font-display text-gray-100 antialiased overflow-x-hidden transition-colors duration-200">
+<div class="relative flex h-full min-h-screen w-full flex-col">
+<header class="sticky top-0 z-30 flex items-center justify-between whitespace-nowrap border-b border-border-dark bg-surface-dark/90 backdrop-blur-md px-4 sm:px-10 py-3 shadow-md">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-white">
+<div class="size-8 text-primary">
+<svg class="w-full h-full" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.8261 30.5736C16.7203 29.8826 20.2244 29.4783 24 29.4783C27.7756 29.4783 31.2797 29.8826 34.1739 30.5736C36.9144 31.2278 39.9967 32.7669 41.3563 33.8352L24.8486 7.36089C24.4571 6.73303 23.5429 6.73303 23.1514 7.36089L6.64374 33.8352C8.00331 32.7669 11.0856 31.2278 13.8261 30.5736Z" fill="currentColor"></path>
+<path clip-rule="evenodd" d="M39.998 35.764C39.9944 35.7463 39.9875 35.7155 39.9748 35.6706C39.9436 35.5601 39.8949 35.4259 39.8346 35.2825C39.8168 35.2403 39.7989 35.1993 39.7813 35.1602C38.5103 34.2887 35.9788 33.0607 33.7095 32.5189C30.9875 31.8691 27.6413 31.4783 24 31.4783C20.3587 31.4783 17.0125 31.8691 14.2905 32.5189C12.0012 33.0654 9.44505 34.3104 8.18538 35.1832C8.17384 35.2075 8.16216 35.233 8.15052 35.2592C8.09919 35.3751 8.05721 35.4886 8.02977 35.589C8.00356 35.6848 8.00039 35.7333 8.00004 35.7388C8.00004 35.739 8 35.7393 8.00004 35.7388C8.00004 35.7641 8.0104 36.0767 8.68485 36.6314C9.34546 37.1746 10.4222 37.7531 11.9291 38.2772C14.9242 39.319 19.1919 40 24 40C28.8081 40 33.0758 39.319 36.0709 38.2772C37.5778 37.7531 38.6545 37.1746 39.3151 36.6314C39.9006 36.1499 39.9857 35.8511 39.998 35.764ZM4.95178 32.7688L21.4543 6.30267C22.6288 4.4191 25.3712 4.41909 26.5457 6.30267L43.0534 32.777C43.0709 32.8052 43.0878 32.8338 43.104 32.8629L41.3563 33.8352C43.104 32.8629 43.1038 32.8626 43.104 32.8629L43.1051 32.865L43.1065 32.8675L43.1101 32.8739L43.1199 32.8918C43.1276 32.906 43.1377 32.9246 43.1497 32.9473C43.1738 32.9925 43.2062 33.0545 43.244 33.1299C43.319 33.2792 43.4196 33.489 43.5217 33.7317C43.6901 34.1321 44 34.9311 44 35.7391C44 37.4427 43.003 38.7775 41.8558 39.7209C40.6947 40.6757 39.1354 41.4464 37.385 42.0552C33.8654 43.2794 29.133 44 24 44C18.867 44 14.1346 43.2794 10.615 42.0552C8.86463 41.4464 7.30529 40.6757 6.14419 39.7209C4.99695 38.7775 3.99999 37.4427 3.99999 35.7391C3.99999 34.8725 4.29264 34.0922 4.49321 33.6393C4.60375 33.3898 4.71348 33.1804 4.79687 33.0311C4.83898 32.9556 4.87547 32.8935 4.9035 32.8471C4.91754 32.8238 4.92954 32.8043 4.93916 32.7889L4.94662 32.777L4.95178 32.7688ZM35.9868 29.004L24 9.77997L12.0131 29.004C12.4661 28.8609 12.9179 28.7342 13.3617 28.6282C16.4281 27.8961 20.0901 27.4783 24 27.4783C27.9099 27.4783 31.5719 27.8961 34.6383 28.6282C35.082 28.7342 35.5339 28.8609 35.9868 29.004Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-xl font-bold leading-tight tracking-[-0.015em]">RESTory Admin</h2>
+</div>
+<div class="hidden lg:flex items-center gap-9">
+<a class="text-gray-400 hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Dashboard</a>
+<a class="text-gray-400 hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Users</a>
+<a class="text-primary text-sm font-medium leading-normal" href="#">Books</a>
+<a class="text-gray-400 hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Settings</a>
+</div>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<label class="hidden sm:flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-[20px]">search</span>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border-none bg-gray-800 h-full placeholder:text-gray-500 pl-10 pr-2 text-sm font-normal leading-normal transition-all" placeholder="Search site..." value=""/>
+</div>
+</label>
+<button class="relative bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 ring-2 ring-transparent hover:ring-primary transition-all" data-alt="User profile picture placeholder, generic avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCfqb2qbSqiLCmV8mQayrYjnx3sBoCN5qPe8Psv-g4jPOeHBaFpxG5RYYqnm_x8E4d3csSTM3liIXD9Cbt7arxNIgbEykI6RWHwi4WfcNaFlltwavxCJoIGdQ6hrChvEVan6sCUn_fRjALlqZXtFpa6SC6f55thFvONPh7taZHcNKzfJP6h6g8HzU5E4BiRF1yc_7_juOgKeAXj79KfV7Tx4aKkL9tDw0WP8kkYUyZxCBaN9b8yfVLgbWk97rb2Bpm9-s4IO4_5n0E");'>
+<div class="absolute bottom-0 right-0 size-3 bg-green-500 border-2 border-surface-dark rounded-full"></div>
+</button>
+</div>
+</header>
+<main class="flex-1 px-4 sm:px-10 py-8 flex justify-center bg-background-dark">
+<div class="flex flex-col w-full max-w-[1440px]">
+<nav class="flex flex-wrap gap-2 pb-6">
+<a class="text-gray-500 hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Home</a>
+<span class="text-gray-600 text-sm font-medium leading-normal">/</span>
+<a class="text-gray-500 hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Admin</a>
+<span class="text-gray-600 text-sm font-medium leading-normal">/</span>
+<span class="text-white text-sm font-medium leading-normal">Book Management</span>
+</nav>
+<div class="flex flex-wrap justify-between items-end gap-4 mb-8">
+<div class="flex flex-col gap-2">
+<h1 class="text-white text-3xl sm:text-4xl font-black leading-tight tracking-[-0.033em]">Catalog Management</h1>
+<p class="text-gray-400 text-base font-normal max-w-2xl">Add new books to the inventory, edit existing information, or remove obsolete titles from the global RESTory database.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<div class="lg:col-span-4 lg:sticky lg:top-24 space-y-6">
+<div class="bg-surface-dark rounded-xl border border-border-dark shadow-xl overflow-hidden">
+<div class="px-6 py-4 border-b border-border-dark bg-gray-900/50 flex justify-between items-center">
+<h2 class="text-lg font-bold text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">add_circle</span>
+                                    New Book
+                                </h2>
+</div>
+<div class="p-6 space-y-5">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-gray-300">Cover</label>
+<div class="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-gray-700 bg-gray-800/30 rounded-lg hover:bg-gray-800 hover:border-primary transition-all cursor-pointer group">
+<div class="flex flex-col items-center justify-center pt-5 pb-6">
+<span class="material-symbols-outlined text-gray-500 group-hover:text-primary text-4xl mb-2 transition-colors">cloud_upload</span>
+<p class="mb-2 text-sm text-gray-400"><span class="font-semibold text-gray-300">Click to upload</span> or drag and drop</p>
+<p class="text-xs text-gray-500">SVG, PNG, JPG (MAX. 2MB)</p>
+</div>
+</div>
+</div>
+<label class="flex flex-col gap-2">
+<span class="text-sm font-semibold text-gray-300">Book Title</span>
+<input class="form-input w-full rounded-lg border border-gray-700 bg-gray-900 text-white px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary placeholder:text-gray-600" placeholder="Ex. The Name of the Rose" type="text"/>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-sm font-semibold text-gray-300">Author</span>
+<input class="form-input w-full rounded-lg border border-gray-700 bg-gray-900 text-white px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary placeholder:text-gray-600" placeholder="Ex. Umberto Eco" type="text"/>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-sm font-semibold text-gray-300">ISBN Code</span>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-[20px]">barcode</span>
+<input class="form-input w-full rounded-lg border border-gray-700 bg-gray-900 text-white pl-10 pr-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary placeholder:text-gray-600" placeholder="978-..." type="text"/>
+</div>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-sm font-semibold text-gray-300">Description</span>
+<textarea class="form-textarea w-full rounded-lg border border-gray-700 bg-gray-900 text-white px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary placeholder:text-gray-600 min-h-[100px] resize-y" placeholder="Brief plot or notes..."></textarea>
+</label>
+<button class="w-full bg-primary hover:bg-blue-600 text-white font-medium py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 mt-2 shadow-lg shadow-blue-500/20">
+<span class="material-symbols-outlined text-[20px]">save</span>
+                                    Save Book
+                                </button>
+</div>
+</div>
+</div>
+<div class="lg:col-span-8 space-y-6">
+<div class="bg-surface-dark rounded-xl border border-border-dark shadow-xl flex flex-col h-full">
+<div class="p-5 border-b border-border-dark flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<h2 class="text-lg font-bold text-white">Inventory</h2>
+<div class="flex gap-3 w-full sm:w-auto">
+<div class="relative w-full sm:w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-[18px]">search</span>
+<input class="w-full pl-9 pr-4 py-2 text-sm rounded-lg border border-gray-700 bg-gray-900 text-white focus:border-primary focus:ring-1 focus:ring-primary placeholder:text-gray-500" placeholder="Search by title, ISBN..." type="text"/>
+</div>
+<button class="flex items-center justify-center size-9 rounded-lg border border-gray-700 bg-gray-900 text-gray-300 hover:bg-gray-800 transition-colors" title="Filter">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto w-full">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-gray-900/50 border-b border-border-dark text-xs uppercase text-gray-400 font-semibold">
+<th class="px-6 py-4 w-20">Cover</th>
+<th class="px-6 py-4">Book Details</th>
+<th class="px-6 py-4 hidden sm:table-cell">ISBN</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-dark">
+<tr class="group hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4">
+<div class="w-12 h-16 rounded overflow-hidden bg-gray-800 shadow-sm relative border border-gray-700">
+<img alt="Book cover generic placeholder" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVj9WZagTDhjQHTqvnEFcb3-jnWen1vE_cWUACvkWoa3QsXfJE3-amOaWxj6gG8-EsBVttGJWOtF1agqNerrnHBVqbRSQcqKt4uvj3HuLTqaa0h8DW-cXO0Y3gIjZkgltYWegjJkh9ZsUHZXXqLytazkshKfK16jRKWBdcUR-y9VTnVGH9JbrJ70lxFImBS2rcJCbUobK0ZyAp16eK_JfXoYN22GHL1TG0yYkJ9kQkJ6ISlvRgNNfclqrJxij-7xiIc0iPAwaWaZM"/>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-semibold text-white text-sm">The Lord of the Rings</span>
+<span class="text-xs text-gray-400">J.R.R. Tolkien</span>
+</div>
+</td>
+<td class="px-6 py-4 hidden sm:table-cell">
+<span class="font-mono text-xs text-gray-400 bg-gray-800 px-2 py-1 rounded border border-gray-700">978-88-452-9457-3</span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-900/30 text-green-400 border border-green-800">
+<span class="size-1.5 rounded-full bg-green-500"></span>
+                                                    Published
+                                                </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-gray-400 hover:text-primary hover:bg-blue-500/10 rounded transition-colors" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-1.5 text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded transition-colors" title="Delete">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="group hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4">
+<div class="w-12 h-16 rounded overflow-hidden bg-gray-800 shadow-sm relative border border-gray-700">
+<img alt="Book cover generic placeholder orange" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYIOGFwFgijJLjBlfuXS-g8ctK8rIJsM5IETPQbe-jkME1OFwfB0coIR_yoJLHUUlL_df12SrbHLLswOh7qN57czOe3yZc8XnzVlqIcEuUnblsQvZaZ8Qviz7qHh9lO-s94BHLp7ljbKNE9mmxeFN0NpJQvETRjEqJA8XBnchZF3TDOOYzcaNfIJIYKPlsS9Uuc7W-y3hO0wzUh7-hj_tpgQauZRCfp65encGdrXk01_TvS_r5V8g7p5WulpIEgs6g-ndwjhlLVJ4"/>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-semibold text-white text-sm">1984</span>
+<span class="text-xs text-gray-400">George Orwell</span>
+</div>
+</td>
+<td class="px-6 py-4 hidden sm:table-cell">
+<span class="font-mono text-xs text-gray-400 bg-gray-800 px-2 py-1 rounded border border-gray-700">978-0-451-52493-5</span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-900/30 text-green-400 border border-green-800">
+<span class="size-1.5 rounded-full bg-green-500"></span>
+                                                    Published
+                                                </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-gray-400 hover:text-primary hover:bg-blue-500/10 rounded transition-colors" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-1.5 text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded transition-colors" title="Delete">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="group hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4">
+<div class="w-12 h-16 rounded overflow-hidden bg-gray-800 shadow-sm relative border border-gray-700">
+<div class="w-full h-full bg-gradient-to-br from-indigo-500 to-purple-600" data-alt="Abstract gradient purple book cover placeholder"></div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-semibold text-white text-sm">Invisible Cities</span>
+<span class="text-xs text-gray-400">Italo Calvino</span>
+</div>
+</td>
+<td class="px-6 py-4 hidden sm:table-cell">
+<span class="font-mono text-xs text-gray-400 bg-gray-800 px-2 py-1 rounded border border-gray-700">978-88-04-36253-1</span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-yellow-900/30 text-yellow-400 border border-yellow-800">
+<span class="size-1.5 rounded-full bg-yellow-500"></span>
+                                                    Draft
+                                                </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-gray-400 hover:text-primary hover:bg-blue-500/10 rounded transition-colors" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-1.5 text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded transition-colors" title="Delete">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-border-dark flex items-center justify-between">
+<span class="text-sm text-gray-400">
+                                    Showing <span class="font-semibold text-white">1-3</span> of <span class="font-semibold text-white">128</span> books
+                                </span>
+<div class="flex items-center gap-2">
+<button class="size-8 flex items-center justify-center rounded border border-gray-700 text-gray-500 hover:bg-gray-800 disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="size-8 flex items-center justify-center rounded border border-primary bg-primary text-white text-sm font-medium">1</button>
+<button class="size-8 flex items-center justify-center rounded border border-gray-700 text-gray-300 hover:bg-gray-800 text-sm font-medium">2</button>
+<button class="size-8 flex items-center justify-center rounded border border-gray-700 text-gray-300 hover:bg-gray-800 text-sm font-medium hidden sm:flex">3</button>
+<span class="text-gray-500 px-1">...</span>
+<button class="size-8 flex items-center justify-center rounded border border-gray-700 text-gray-300 hover:bg-gray-800 text-sm font-medium hidden sm:flex">12</button>
+<button class="size-8 flex items-center justify-center rounded border border-gray-700 text-gray-500 hover:bg-gray-800">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

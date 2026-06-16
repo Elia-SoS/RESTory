@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Book Search - RESTory</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "surface-dark": "#1f2b42",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 24px;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased selection:bg-primary selection:text-white">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<header class="sticky top-0 z-50 flex items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-surface-light/90 dark:bg-background-dark/90 backdrop-blur-md px-6 py-4 lg:px-10">
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center size-8 bg-primary rounded-lg text-white">
+<span class="material-symbols-outlined" style="font-size: 20px;">menu_book</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">RESTory</h2>
+</div>
+<nav class="hidden md:flex flex-1 justify-center gap-8">
+<a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-white transition-colors" href="#">My Library</a>
+<a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-white transition-colors" href="#">Statistics</a>
+<a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-white transition-colors" href="#">Profile</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex gap-2">
+<button class="group flex size-10 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-surface-dark transition-colors">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-400 group-hover:text-primary">notifications</span>
+</button>
+<button class="group flex size-10 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-surface-dark transition-colors">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-400 group-hover:text-primary">settings</span>
+</button>
+</div>
+<div class="relative size-10 overflow-hidden rounded-full border-2 border-white dark:border-surface-dark shadow-sm bg-cover bg-center" data-alt="User profile avatar showing a smiling person" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAfHNuCAK6MrKFeLGCzKSKcXH4MR_KoIE_Xe7UH4XWhvF4_1a23_DMcj4XHXaBqmAJ6lS2A4pfy6k5IRGNDlP0LguKcD-w9rTexbNi8Ww8Z-wb2ijCBV6aNTbEfjiuDnQVU3F8Y-AFD4mIg-gBZdwh9H6sU3CN0n4lp5JNzvFYoDrV1W7vZVvBvQFODo2iz7qlS580ZCqJgZgXapH8MYkpuxO7xnDKeSweE5gT5ncc9W2e9kmDvX9AMlthBjB2Zew0or60jOiaDMKU");'>
+</div>
+</div>
+</header>
+<main class="flex-1 px-4 py-8 md:px-8 lg:px-40">
+<div class="mx-auto flex max-w-[1200px] flex-col gap-8">
+<div class="flex flex-col gap-2">
+<h1 class="text-3xl md:text-4xl font-black tracking-tight text-slate-900 dark:text-white">Book Search</h1>
+<p class="text-base text-slate-500 dark:text-slate-400 max-w-2xl">
+                    Explore a vast catalog to find your next read. Search by title, author, or ISBN to filter exactly what you're looking for.
+                </p>
+</div>
+<div class="flex flex-col gap-6 rounded-2xl bg-white dark:bg-surface-dark p-6 shadow-sm border border-slate-200 dark:border-slate-800">
+<div class="relative w-full">
+<div class="flex w-full items-center rounded-xl bg-slate-50 dark:bg-[#101622] border border-slate-200 dark:border-slate-700 focus-within:ring-2 focus-within:ring-primary focus-within:border-primary overflow-hidden transition-all">
+<div class="flex h-14 w-14 items-center justify-center text-slate-400">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="h-14 w-full border-none bg-transparent px-2 text-base font-medium text-slate-900 placeholder:text-slate-400 dark:text-white focus:ring-0" placeholder="Search title, author, ISBN..." value="Harry Potter"/>
+<button class="mr-2 flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+<button class="mr-2 h-10 rounded-lg bg-primary px-6 text-sm font-bold text-white shadow-md hover:bg-blue-600 transition-colors">
+                            Search
+                        </button>
+</div>
+</div>
+<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Author</label>
+<div class="flex h-11 items-center rounded-lg border border-slate-200 bg-slate-50 px-3 dark:border-slate-700 dark:bg-[#101622]">
+<input class="w-full border-none bg-transparent p-0 text-sm text-slate-900 placeholder:text-slate-400 dark:text-white focus:ring-0" placeholder="Ex. J.K. Rowling"/>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Publisher</label>
+<div class="flex h-11 items-center rounded-lg border border-slate-200 bg-slate-50 px-3 dark:border-slate-700 dark:bg-[#101622]">
+<input class="w-full border-none bg-transparent p-0 text-sm text-slate-900 placeholder:text-slate-400 dark:text-white focus:ring-0" placeholder="Ex. Mondadori"/>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Publication Year</label>
+<div class="flex h-11 items-center rounded-lg border border-slate-200 bg-slate-50 px-3 dark:border-slate-700 dark:bg-[#101622]">
+<input class="w-full border-none bg-transparent p-0 text-sm text-slate-900 placeholder:text-slate-400 dark:text-white focus:ring-0" placeholder="Ex. 2023" type="number"/>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Language</label>
+<div class="relative flex h-11 items-center rounded-lg border border-slate-200 bg-slate-50 px-3 dark:border-slate-700 dark:bg-[#101622]">
+<select class="w-full border-none bg-transparent p-0 text-sm text-slate-900 dark:text-white focus:ring-0">
+<option>Any</option>
+<option>Italian</option>
+<option>English</option>
+<option>French</option>
+</select>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<span class="text-sm font-semibold text-slate-700 dark:text-slate-300">Popular Genres</span>
+<div class="flex flex-wrap gap-2">
+<button class="flex h-8 items-center rounded-full bg-primary/10 px-4 text-xs font-bold uppercase tracking-wide text-primary hover:bg-primary hover:text-white transition-colors dark:bg-primary/20 dark:text-blue-300 dark:hover:bg-primary dark:hover:text-white">
+                            Fantasy
+                        </button>
+<button class="flex h-8 items-center rounded-full bg-slate-100 px-4 text-xs font-bold uppercase tracking-wide text-slate-600 hover:bg-slate-200 transition-colors dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-slate-700">
+                            Science Fiction
+                        </button>
+<button class="flex h-8 items-center rounded-full bg-slate-100 px-4 text-xs font-bold uppercase tracking-wide text-slate-600 hover:bg-slate-200 transition-colors dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-slate-700">
+                            Mystery
+                        </button>
+<button class="flex h-8 items-center rounded-full bg-slate-100 px-4 text-xs font-bold uppercase tracking-wide text-slate-600 hover:bg-slate-200 transition-colors dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-slate-700">
+                            Horror
+                        </button>
+<button class="flex h-8 items-center rounded-full bg-slate-100 px-4 text-xs font-bold uppercase tracking-wide text-slate-600 hover:bg-slate-200 transition-colors dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-slate-700">
+                            Romance
+                        </button>
+<button class="flex h-8 items-center rounded-full bg-slate-100 px-4 text-xs font-bold uppercase tracking-wide text-slate-600 hover:bg-slate-200 transition-colors dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-slate-700">
+                            Non-fiction
+                        </button>
+<button class="flex h-8 items-center rounded-full border border-dashed border-slate-300 px-3 text-xs font-medium text-slate-500 hover:border-primary hover:text-primary transition-colors dark:border-slate-600 dark:text-slate-400 dark:hover:border-primary dark:hover:text-primary">
+<span class="material-symbols-outlined mr-1 !text-[16px]">add</span> Other
+                        </button>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<h3 class="text-xl font-bold text-slate-900 dark:text-white">Trending Now</h3>
+<a class="text-sm font-bold text-primary hover:underline" href="#">See All</a>
+</div>
+<div class="flex gap-6 overflow-x-auto pb-4 no-scrollbar -mx-4 px-4 md:mx-0 md:px-0">
+<div class="flex-none w-48 group relative flex flex-col gap-3 rounded-xl bg-white p-3 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg dark:bg-surface-dark dark:shadow-none dark:hover:bg-[#25324b]">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-slate-200 dark:bg-slate-800">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105" style='background-image: url("https://images.unsplash.com/photo-1506466010722-395aa2bef877?q=80&amp;w=2000&amp;auto=format&amp;fit=crop");'></div>
+</div>
+<div>
+<h4 class="line-clamp-1 text-sm font-bold text-slate-900 dark:text-white group-hover:text-primary">The Lord of the Rings</h4>
+<p class="mt-0.5 text-xs text-slate-500 dark:text-slate-400">J.R.R. Tolkien</p>
+</div>
+</div>
+<div class="flex-none w-48 group relative flex flex-col gap-3 rounded-xl bg-white p-3 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg dark:bg-surface-dark dark:shadow-none dark:hover:bg-[#25324b]">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-slate-200 dark:bg-slate-800">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105" style='background-image: url("https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&amp;w=1974&amp;auto=format&amp;fit=crop");'></div>
+</div>
+<div>
+<h4 class="line-clamp-1 text-sm font-bold text-slate-900 dark:text-white group-hover:text-primary">A Game of Thrones</h4>
+<p class="mt-0.5 text-xs text-slate-500 dark:text-slate-400">George R.R. Martin</p>
+</div>
+</div>
+<div class="flex-none w-48 group relative flex flex-col gap-3 rounded-xl bg-white p-3 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg dark:bg-surface-dark dark:shadow-none dark:hover:bg-[#25324b]">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-slate-200 dark:bg-slate-800">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105" style='background-image: url("https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&amp;w=1974&amp;auto=format&amp;fit=crop");'></div>
+</div>
+<div>
+<h4 class="line-clamp-1 text-sm font-bold text-slate-900 dark:text-white group-hover:text-primary">Foundation</h4>
+<p class="mt-0.5 text-xs text-slate-500 dark:text-slate-400">Isaac Asimov</p>
+</div>
+</div>
+<div class="flex-none w-48 group relative flex flex-col gap-3 rounded-xl bg-white p-3 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg dark:bg-surface-dark dark:shadow-none dark:hover:bg-[#25324b]">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-slate-200 dark:bg-slate-800">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105" style='background-image: url("https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&amp;w=1996&amp;auto=format&amp;fit=crop");'></div>
+</div>
+<div>
+<h4 class="line-clamp-1 text-sm font-bold text-slate-900 dark:text-white group-hover:text-primary">The Hobbit</h4>
+<p class="mt-0.5 text-xs text-slate-500 dark:text-slate-400">J.R.R. Tolkien</p>
+</div>
+</div>
+</div>
+</div><div class="flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<h3 class="text-xl font-bold text-slate-900 dark:text-white">Search Results <span class="ml-2 rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300">24</span></h3>
+<div class="flex items-center gap-2">
+<span class="text-sm font-medium text-slate-500">Sort by:</span>
+<select class="rounded-lg border-none bg-transparent py-1 pl-2 pr-8 text-sm font-bold text-slate-900 dark:text-white focus:ring-0">
+<option>Relevance</option>
+<option>Most Recent</option>
+<option>Rating</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+<div class="group relative flex flex-col gap-3 rounded-xl bg-white p-3 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg dark:bg-surface-dark dark:shadow-none dark:hover:bg-[#25324b]">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-slate-200 dark:bg-slate-800">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105" data-alt="Cover of Harry Potter and the Philosopher's Stone book with magical illustration" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAbbMrM4cVn7XMGA-Ua7GoOuoKSMmsSXSverHSLK0VYWcxyT__mCJW2SC__8RiLU1IW7DMBcInURtN0bX9FJRcrPlG67dX6p0Xr-PdOPbeLzhzcCzNpkbw-XZnapaWF3DO7pOT7F31H0sGgi3tYpGeHDoAbn-SiWnJcqV0QtVo-SkFFvfa2CaxsSE7_GIshOnzuoUbgmYqBDNkG7szBfenU3KYCPLogb7Irw7hkIPkvVz5nwPEqmh-56MXXUPL2sPkdD3G0rHPvMwE");'>
+</div>
+</div>
+<div class="flex flex-1 flex-col justify-between gap-3">
+<div>
+<h4 class="line-clamp-2 text-base font-bold leading-tight text-slate-900 dark:text-white group-hover:text-primary">Harry Potter and the Philosopher's Stone</h4>
+<p class="mt-1 text-sm text-slate-500 dark:text-slate-400">J.K. Rowling</p>
+<p class="text-xs text-slate-400">1997 • Fantasy</p><div class="flex items-center gap-1 mt-1"><span class="material-symbols-outlined !text-[14px] text-yellow-500 filled">star</span><span class="text-xs font-semibold text-slate-700 dark:text-slate-300">4.8</span></div>
+</div>
+<button class="flex w-full items-center justify-center gap-2 rounded-lg bg-slate-100 py-2 text-sm font-bold text-slate-700 hover:bg-primary hover:text-white transition-colors dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-primary dark:hover:text-white">
+<span class="material-symbols-outlined !text-[18px]">add</span>
+                                Add
+                            </button>
+</div>
+</div>
+<div class="group relative flex flex-col gap-3 rounded-xl bg-white p-3 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg dark:bg-surface-dark dark:shadow-none dark:hover:bg-[#25324b]">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-slate-200 dark:bg-slate-800">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105" data-alt="Cover of Harry Potter and the Chamber of Secrets book with dark blue hues" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCRBZYOHqtmaq2mMmvM62ifApYEJBSwdSFPdJDAAhMLLFfy8nIF73ii1GctyRYUKql-pe_meVcSOBXLrJOyvs2KFjkITj-fLmTxTo_m06ghsNxRVlK6ExaW6_PoxQes3HjgBanboxJmwAjm0ZseavQgEtGnrGiX4mXX1vElhv93c9WOIgb7811nPGlFWM39mb_FeCFM36i6zSn430wgShWn-6Lau26ZOVusH_0z-pCsP3Jso5eP6XhDyF3FRBUNDzhj73AayNy_Hrw");'>
+</div>
+</div>
+<div class="flex flex-1 flex-col justify-between gap-3">
+<div>
+<h4 class="line-clamp-2 text-base font-bold leading-tight text-slate-900 dark:text-white group-hover:text-primary">Harry Potter and the Chamber of Secrets</h4>
+<p class="mt-1 text-sm text-slate-500 dark:text-slate-400">J.K. Rowling</p>
+<p class="text-xs text-slate-400">1998 • Fantasy</p><div class="flex items-center gap-1 mt-1"><span class="material-symbols-outlined !text-[14px] text-yellow-500 filled">star</span><span class="text-xs font-semibold text-slate-700 dark:text-slate-300">4.7</span></div>
+</div>
+<button class="flex w-full items-center justify-center gap-2 rounded-lg bg-slate-100 py-2 text-sm font-bold text-slate-700 hover:bg-primary hover:text-white transition-colors dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-primary dark:hover:text-white">
+<span class="material-symbols-outlined !text-[18px]">add</span>
+                                Add
+                            </button>
+</div>
+</div>
+<div class="group relative flex flex-col gap-3 rounded-xl bg-white p-3 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg dark:bg-surface-dark dark:shadow-none dark:hover:bg-[#25324b]">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-slate-200 dark:bg-slate-800">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105" data-alt="Cover of Harry Potter and the Prisoner of Azkaban showing mystical elements" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCrFdM3T5U-bzR0-Nxfv-4o8DvABO1yL8F6w5hYzMjmxo2ovnz6AXEkog8hNgORU4kkc9JgD_g9Wg8UisXu5G57aA1Ivs-3z-D7lkA-cNLMzlfhnY_vOEUugrzRFySKusGRTkwLtJfeFtSIVlp2uAtUydfDfFfzw7EcGSBfDQQmF2sZ1PgWUkLHsAf9UzxQQfbvHWUSzo1L1q2LOjCbPjcim1ZJtVqQrJMImwwWlD_xUmvje2KEW0ZLIJ1rKBXhrhDaE0ipGKRxYtM");'>
+</div>
+</div>
+<div class="flex flex-1 flex-col justify-between gap-3">
+<div>
+<h4 class="line-clamp-2 text-base font-bold leading-tight text-slate-900 dark:text-white group-hover:text-primary">Harry Potter and the Prisoner of Azkaban</h4>
+<p class="mt-1 text-sm text-slate-500 dark:text-slate-400">J.K. Rowling</p>
+<p class="text-xs text-slate-400">1999 • Fantasy</p><div class="flex items-center gap-1 mt-1"><span class="material-symbols-outlined !text-[14px] text-yellow-500 filled">star</span><span class="text-xs font-semibold text-slate-700 dark:text-slate-300">4.8</span></div>
+</div>
+<button class="flex w-full items-center justify-center gap-2 rounded-lg bg-slate-100 py-2 text-sm font-bold text-slate-700 hover:bg-primary hover:text-white transition-colors dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-primary dark:hover:text-white">
+<span class="material-symbols-outlined !text-[18px]">add</span>
+                                Add
+                            </button>
+</div>
+</div>
+<div class="group relative flex flex-col gap-3 rounded-xl bg-white p-3 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg dark:bg-surface-dark dark:shadow-none dark:hover:bg-[#25324b]">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-slate-200 dark:bg-slate-800">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105" data-alt="Cover of a book titled The Magical Worlds of Harry Potter" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuACsidNesQseXkCCIVWiTOx9NqfY2NzmoV3Jlml14Ih665szIy7Ogsg38FmVxPWWnQKsYCOVzACz_jzx3q-hfttZH1fruRRM5xE60H3J1G_y2XTp3HoybhgIsgI65X7CgukrPoK4ZdKcizVxtOGMPCw1Yii8TOEMHKgU7JlexLD6Mh2FC9-o6DXbQ5zpq3v3s3psbbIqTZmcb2WR7ZP8jKtlLAVNYoC5j1SXpg1GTNXoS4kDoIlW4WkpJpv9X1xE7yuKzbKT_XO-d4");'>
+</div>
+</div>
+<div class="flex flex-1 flex-col justify-between gap-3">
+<div>
+<h4 class="line-clamp-2 text-base font-bold leading-tight text-slate-900 dark:text-white group-hover:text-primary">The Magical Worlds of Harry Potter</h4>
+<p class="mt-1 text-sm text-slate-500 dark:text-slate-400">David Colbert</p>
+<p class="text-xs text-slate-400">2001 • Non-fiction</p><div class="flex items-center gap-1 mt-1"><span class="material-symbols-outlined !text-[14px] text-yellow-500 filled">star</span><span class="text-xs font-semibold text-slate-700 dark:text-slate-300">4.5</span></div>
+</div>
+<button class="flex w-full items-center justify-center gap-2 rounded-lg bg-slate-100 py-2 text-sm font-bold text-slate-700 hover:bg-primary hover:text-white transition-colors dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-primary dark:hover:text-white">
+<span class="material-symbols-outlined !text-[18px]">add</span>
+                                Add
+                            </button>
+</div>
+</div>
+<div class="group relative flex flex-col gap-3 rounded-xl bg-white p-3 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg dark:bg-surface-dark dark:shadow-none dark:hover:bg-[#25324b]">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-slate-200 dark:bg-slate-800">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105" data-alt="Cover of Harry Potter and the Goblet of Fire book" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDQBlNjEKmG1sDCp9jsU0ZCdH5c7NVY2V36MZ9TTZ87SB-_RxfSp70aW_JQoOhihu8CHbJUPgxl_Hs0Vgd0tCJYv4ht5h96Ombag4RlT9IaC1PaeEINuKaiA7Y1Jq_vqk29NSGxu7p4FS3EjUrA8og9t2gnBulrUGdAZpnth2cctzfO2vUPcguTcNz4FGhCFiOzXrqkMW3bwdASwR-AQLmY3tqNRtlSgCyKlkee5J2rMMlgUTrn7FV3n87qsU_4Zhhl6VHXrjd3imU");'>
+</div>
+</div>
+<div class="flex flex-1 flex-col justify-between gap-3">
+<div>
+<h4 class="line-clamp-2 text-base font-bold leading-tight text-slate-900 dark:text-white group-hover:text-primary">Harry Potter and the Goblet of Fire</h4>
+<p class="mt-1 text-sm text-slate-500 dark:text-slate-400">J.K. Rowling</p>
+<p class="text-xs text-slate-400">2000 • Fantasy</p><div class="flex items-center gap-1 mt-1"><span class="material-symbols-outlined !text-[14px] text-yellow-500 filled">star</span><span class="text-xs font-semibold text-slate-700 dark:text-slate-300">4.9</span></div>
+</div>
+<button class="flex w-full items-center justify-center gap-2 rounded-lg bg-slate-100 py-2 text-sm font-bold text-slate-700 hover:bg-primary hover:text-white transition-colors dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-primary dark:hover:text-white">
+<span class="material-symbols-outlined !text-[18px]">add</span>
+                                Add
+                            </button>
+</div>
+</div>
+<div class="group relative flex flex-col gap-3 rounded-xl bg-white p-3 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg dark:bg-surface-dark dark:shadow-none dark:hover:bg-[#25324b]">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-slate-200 dark:bg-slate-800">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105" data-alt="Cover of Harry Potter and the Order of the Phoenix book" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCSsL_O7kTUt0aSjddJezf4gei9C7AvdMFiQ4Pzf83HSvIC_qDdrGhMc632KBg23N6SYLsTtuT_y5Jwuoyang9pJGtR45vA9FIPqOIPA1_XNOa-PJqk7KfY94cdFb9SKZH4Dfg6NlBxcaRTP8YJIDVmxt1TxcHJyKy2v76dFRKhKaHHDcw7-pC4TBv_lHy77ah2k8j-Z-MZ8sa6q6eEHGEtvyxaqWn-kYpR_6YlwKOuwOaOOQHYiK2a1Ho8wGsbdCx_LCDaSqz47sQ");'>
+</div>
+</div>
+<div class="flex flex-1 flex-col justify-between gap-3">
+<div>
+<h4 class="line-clamp-2 text-base font-bold leading-tight text-slate-900 dark:text-white group-hover:text-primary">Harry Potter and the Order of the Phoenix</h4>
+<p class="mt-1 text-sm text-slate-500 dark:text-slate-400">J.K. Rowling</p>
+<p class="text-xs text-slate-400">2003 • Fantasy</p><div class="flex items-center gap-1 mt-1"><span class="material-symbols-outlined !text-[14px] text-yellow-500 filled">star</span><span class="text-xs font-semibold text-slate-700 dark:text-slate-300">4.8</span></div>
+</div>
+<button class="flex w-full items-center justify-center gap-2 rounded-lg bg-slate-100 py-2 text-sm font-bold text-slate-700 hover:bg-primary hover:text-white transition-colors dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-primary dark:hover:text-white">
+<span class="material-symbols-outlined !text-[18px]">add</span>
+                                Add
+                            </button>
+</div>
+</div>
+<div class="group relative flex flex-col gap-3 rounded-xl bg-white p-3 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg dark:bg-surface-dark dark:shadow-none dark:hover:bg-[#25324b]">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-slate-200 dark:bg-slate-800">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105" data-alt="Cover of Harry Potter and the Half-Blood Prince book" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAknwdIZeNPaB_bPybg2puxbfdb-dbZNE1g4HtuYrOjdx948zkCCek8ASCH2-JuTBh9PMnVhwe5eKFWdqEvgveuB_E5ZC0FXFImGfOTgt1G0wnrD2OVK0vEEZhcRiCi3g1Rr1BntLj9_bIlFw1KqvQuIwhFPp_nSP2qktapuMQEW0IEfWqCND6Q2fRAN9Y_o98kWLDik5DmhngVEUbR7lJ9NdVTpOJfxhmCNlkLGHtnll4GpYWXF7XUGS7Emlp7SeQe2d75NSqz7vA");'>
+</div>
+</div>
+<div class="flex flex-1 flex-col justify-between gap-3">
+<div>
+<h4 class="line-clamp-2 text-base font-bold leading-tight text-slate-900 dark:text-white group-hover:text-primary">Harry Potter and the Half-Blood Prince</h4>
+<p class="mt-1 text-sm text-slate-500 dark:text-slate-400">J.K. Rowling</p>
+<p class="text-xs text-slate-400">2005 • Fantasy</p><div class="flex items-center gap-1 mt-1"><span class="material-symbols-outlined !text-[14px] text-yellow-500 filled">star</span><span class="text-xs font-semibold text-slate-700 dark:text-slate-300">4.8</span></div>
+</div>
+<button class="flex w-full items-center justify-center gap-2 rounded-lg bg-slate-100 py-2 text-sm font-bold text-slate-700 hover:bg-primary hover:text-white transition-colors dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-primary dark:hover:text-white">
+<span class="material-symbols-outlined !text-[18px]">add</span>
+                                Add
+                            </button>
+</div>
+</div>
+<div class="group relative flex flex-col gap-3 rounded-xl bg-white p-3 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg dark:bg-surface-dark dark:shadow-none dark:hover:bg-[#25324b]">
+<div class="relative aspect-[2/3] w-full overflow-hidden rounded-lg bg-slate-200 dark:bg-slate-800">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105" data-alt="Cover of Harry Potter and the Deathly Hallows book" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA58IPeNyZ6CAqotz5JcL18nWyCRZpnr9WOnRV7wcxzAHRs0D-YJg1Nc8PoRPp011EwRIaNunxy7Am6pjgEgM4x7p7rUBep0IY8hlvlxYyNiMFiu8Cli8v0Qw1kwoPyHa1x1296CxDklK2xiA5NndloZSyWh7dJ0UhoggUfUITU7r8wlOes76Orrtb9KGGC_MmJX-1jOub3uMXW-WYPmKD75OwctwG22Ogvzs8MaE6B6rQL9oIEz4cSGrjNjirLUJG8jCHtf8XESgQ");'>
+</div>
+</div>
+<div class="flex flex-1 flex-col justify-between gap-3">
+<div>
+<h4 class="line-clamp-2 text-base font-bold leading-tight text-slate-900 dark:text-white group-hover:text-primary">Harry Potter and the Deathly Hallows</h4>
+<p class="mt-1 text-sm text-slate-500 dark:text-slate-400">J.K. Rowling</p>
+<p class="text-xs text-slate-400">2007 • Fantasy</p><div class="flex items-center gap-1 mt-1"><span class="material-symbols-outlined !text-[14px] text-yellow-500 filled">star</span><span class="text-xs font-semibold text-slate-700 dark:text-slate-300">4.9</span></div>
+</div>
+<button class="flex w-full items-center justify-center gap-2 rounded-lg bg-slate-100 py-2 text-sm font-bold text-slate-700 hover:bg-primary hover:text-white transition-colors dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-primary dark:hover:text-white">
+<span class="material-symbols-outlined !text-[18px]">check</span>
+                                In Library
+                            </button>
+</div>
+</div>
+</div>
+<div class="flex justify-center pt-8">
+<button class="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-bold text-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:border-slate-700 dark:bg-surface-dark dark:text-white dark:hover:bg-[#25324b]">
+                        Load more results
+                        <span class="material-symbols-outlined text-[20px]">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

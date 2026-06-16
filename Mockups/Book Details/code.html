@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Book Details - RESTory</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "surface-dark": "#1a2332",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display min-h-screen flex flex-col overflow-x-hidden text-slate-900 dark:text-white">
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-[#232f48] bg-surface-light dark:bg-background-dark px-6 py-3 lg:px-10">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-slate-900 dark:text-white">
+<div class="size-8 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">menu_book</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">RESTory</h2>
+</div>
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Home</a>
+<a class="text-slate-900 dark:text-white text-sm font-medium leading-normal" href="#">My Books</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Explore</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Community</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<label class="hidden sm:flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full group bg-slate-100 dark:bg-[#232f48] border border-transparent focus-within:border-primary">
+<div class="text-slate-400 dark:text-[#92a4c9] flex items-center justify-center pl-4">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden bg-transparent border-none text-slate-900 dark:text-white focus:ring-0 placeholder:text-slate-400 dark:placeholder:text-[#92a4c9] px-3 text-sm font-normal leading-normal h-full rounded-lg" placeholder="Search book, author..."/>
+</div>
+</label>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border border-slate-200 dark:border-slate-700" data-alt="User profile avatar showing a smiling person" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAezSFfwM8M4vUW0tm_Egj3dUZ3AdD4U1WQiSv6og2ZmBr4C8AuQeuGL4XglTxVVVYLZ1d5vxbN83nyp-236lqK6PiGdmMS3PiACUkWV4Syfh88xT1nTFuVBYwRK7aRZN6e5zsPTvoMs6NijXCy6SMBkwHeen4nB7YH2n53M46Hs9rY0rPldH_nfpyYc-ZIZwQah8tlj8pVI2ZcFokFBMXbeuaChdrpvuQqTdhCPBgF_DgzfgjJO2SdUQsDO60wu2J5YzplyMWNEVs");'></div>
+</div>
+</header>
+<main class="flex-1 flex justify-center py-8 px-4 sm:px-8 lg:px-40">
+<div class="flex flex-col max-w-[1200px] flex-1 gap-8">
+<nav class="flex flex-wrap gap-2 text-sm">
+<a class="text-slate-500 dark:text-[#92a4c9] hover:text-primary transition-colors" href="#">Home</a>
+<span class="text-slate-500 dark:text-[#92a4c9]">/</span>
+<a class="text-slate-500 dark:text-[#92a4c9] hover:text-primary transition-colors" href="#">Books</a>
+<span class="text-slate-500 dark:text-[#92a4c9]">/</span>
+<a class="text-slate-500 dark:text-[#92a4c9] hover:text-primary transition-colors" href="#">Fantasy</a>
+<span class="text-slate-500 dark:text-[#92a4c9]">/</span>
+<span class="text-slate-900 dark:text-white font-medium">The Name of the Wind</span>
+</nav>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+<div class="lg:col-span-8 flex flex-col gap-8">
+<div>
+<h1 class="text-3xl md:text-4xl font-bold leading-tight tracking-tight text-slate-900 dark:text-white mb-2">
+                        The Name of the Wind
+                    </h1>
+<div class="flex flex-col sm:flex-row sm:items-center gap-4 text-slate-600 dark:text-slate-400">
+<h2 class="text-xl font-medium text-primary hover:underline cursor-pointer">Patrick Rothfuss</h2>
+<span class="hidden sm:inline opacity-50">•</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-yellow-400 text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold text-slate-900 dark:text-white">4.5</span>
+<span class="text-sm">(12.4k votes)</span>
+</div>
+<span class="hidden sm:inline opacity-50">•</span>
+<span class="text-sm">Published in 2007</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 rounded-full bg-slate-200 dark:bg-surface-dark border border-slate-300 dark:border-slate-700 text-xs font-medium text-slate-700 dark:text-slate-300">Fantasy</span>
+<span class="px-3 py-1 rounded-full bg-slate-200 dark:bg-surface-dark border border-slate-300 dark:border-slate-700 text-xs font-medium text-slate-700 dark:text-slate-300">Magic</span>
+<span class="px-3 py-1 rounded-full bg-slate-200 dark:bg-surface-dark border border-slate-300 dark:border-slate-700 text-xs font-medium text-slate-700 dark:text-slate-300">Adventure</span>
+<span class="px-3 py-1 rounded-full bg-slate-200 dark:bg-surface-dark border border-slate-300 dark:border-slate-700 text-xs font-medium text-slate-700 dark:text-slate-300">Epic</span>
+</div>
+<div class="prose dark:prose-invert max-w-none text-slate-600 dark:text-slate-300 leading-relaxed">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Synopsis</h3>
+<p>
+                        No one knows where he comes from. They say he is a hero or a demon, a wizard or a madman. They say he spoke to gods and loved fairies. His name is Kvothe. Now he lives incognito, running a quiet inn in the middle of nowhere, but his past is about to catch up with him.
+                    </p>
+<p class="mt-4">
+                        This is the story of how a young orphan became a legend. A story of survival, ambition, and the search for truth behind the myths. The Name of the Wind is a masterpiece of modern fantasy that will drag you into a world full of details and unforgettable characters.
+                    </p>
+<button class="mt-2 text-primary text-sm font-medium hover:underline flex items-center gap-1">
+                        Read more <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+<div class="pt-6 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-bold text-slate-900 dark:text-white">Community Reviews</h3>
+<div class="flex items-center gap-2">
+<span class="text-sm text-slate-500">Sort by:</span>
+<select class="bg-transparent border-none text-sm font-medium text-slate-900 dark:text-white focus:ring-0 cursor-pointer pr-8">
+<option>Most recent</option>
+<option>Most popular</option>
+</select>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<div class="flex gap-4 p-4 rounded-xl bg-slate-100 dark:bg-surface-dark">
+<div class="shrink-0">
+<div class="size-10 rounded-full bg-cover bg-center" data-alt="Avatar of user Marco Rossi" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAx7EWHNPvPj4GYGUfms3ZaW6uZtLGjtUFZ9El0jf1ejxnE-FI0f9wsSjv-5OVSWOnXop0-RYZm1cL7dG5Kz2eHezWa-DKb-F5qNaeztbE2YUACat6HF-Jca7XXUKRCPA-UhT5g75UN5E6WEfHvKXzksgN3JxvFgQfUzoGMmgOt2D81cgFV0AaAynT4s7xZIUa85iXYq6oBkMukh-ESE07oJnl5TB2GiaNIvpopdirvxX4pHt5UfmWnNNBcMhZ_ZR89qNy9fXRIAt4");'></div>
+</div>
+<div class="flex flex-col gap-2 flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="text-sm font-bold text-slate-900 dark:text-white">Marco Rossi</h4>
+<span class="text-xs text-slate-500">2 days ago</span>
+</div>
+<div class="flex text-yellow-400 text-sm">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<p class="text-sm text-slate-600 dark:text-slate-300">
+                                    One of the best fantasy books I have ever read. Rothfuss's prose is poetic and engaging. I can't wait to read the sequel!
+                                </p>
+<div class="flex gap-4 mt-1">
+<button class="flex items-center gap-1 text-xs text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
+<span class="material-symbols-outlined text-base">thumb_up</span> 24
+                                    </button>
+<button class="flex items-center gap-1 text-xs text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
+<span class="material-symbols-outlined text-base">chat_bubble</span> Reply
+                                    </button>
+</div>
+</div>
+</div>
+<div class="flex gap-4 p-4 rounded-xl bg-slate-100 dark:bg-surface-dark">
+<div class="shrink-0">
+<div class="size-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-sm">
+                                    EL
+                                </div>
+</div>
+<div class="flex flex-col gap-2 flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="text-sm font-bold text-slate-900 dark:text-white">Elena Bianchi</h4>
+<span class="text-xs text-slate-500">1 week ago</span>
+</div>
+<div class="flex text-yellow-400 text-sm">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg text-slate-600">star</span>
+</div>
+</div>
+<p class="text-sm text-slate-600 dark:text-slate-300">
+                                    Beautiful, but the beginning is a bit slow. Once the story gets going, it's impossible to stop reading.
+                                </p>
+<div class="flex gap-4 mt-1">
+<button class="flex items-center gap-1 text-xs text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
+<span class="material-symbols-outlined text-base">thumb_up</span> 8
+                                    </button>
+<button class="flex items-center gap-1 text-xs text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
+<span class="material-symbols-outlined text-base">chat_bubble</span> Reply
+                                    </button>
+</div>
+</div>
+</div>
+<button class="w-full py-3 text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-surface-dark rounded-lg transition-colors border border-dashed border-slate-300 dark:border-slate-700">
+                            Load more reviews
+                        </button>
+</div>
+</div>
+</div>
+<aside class="lg:col-span-4 flex flex-col gap-6">
+<div class="w-full relative group shadow-2xl rounded-lg overflow-hidden">
+<div class="aspect-[2/3] w-full bg-center bg-no-repeat bg-cover" data-alt="Cover of the book The Name of the Wind showing a mysterious figure" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBs9M08-W7cu31wPfl1-UDQ48W8_AulumxXJAHxLXNCUHqODcrWLHlzFmz0s1dhuy_3_qBGREbvxFhTZcxq_toVEty3Z_lj35M-lStQcul5pf_vGWVFcWsPg9yVmxflNTpltZ5D1nncS78waou576o9EG_ETG6tw21isiedjWjwRZnnjP3JFFCUduovUOEQkL9mUUCvWf34CEcpwMcFY-91dAMR96Gwk7bbo7eGNnyqhp6ATCy-CyuveaXqp406wcIl5c3AONMqKSY");'>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
+</div>
+</div>
+<div class="bg-white dark:bg-surface-dark rounded-xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col gap-4">
+<div class="flex flex-col gap-2">
+<label class="text-xs uppercase font-bold text-slate-500 tracking-wider">Reading Status</label>
+<button class="flex items-center justify-center gap-2 w-full bg-primary hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg transition-colors shadow-lg shadow-primary/30">
+<span>Add to library</span>
+<span class="material-symbols-outlined text-xl">arrow_drop_down</span>
+</button>
+</div>
+<div class="h-px bg-slate-200 dark:bg-slate-700 my-1"></div>
+<div class="flex flex-col gap-2">
+<label class="text-xs uppercase font-bold text-slate-500 tracking-wider">Your Rating</label>
+<div class="flex justify-between items-center px-2">
+<button class="text-slate-300 hover:text-yellow-400 transition-colors"><span class="material-symbols-outlined text-3xl">star</span></button>
+<button class="text-slate-300 hover:text-yellow-400 transition-colors"><span class="material-symbols-outlined text-3xl">star</span></button>
+<button class="text-slate-300 hover:text-yellow-400 transition-colors"><span class="material-symbols-outlined text-3xl">star</span></button>
+<button class="text-slate-300 hover:text-yellow-400 transition-colors"><span class="material-symbols-outlined text-3xl">star</span></button>
+<button class="text-slate-300 hover:text-yellow-400 transition-colors"><span class="material-symbols-outlined text-3xl">star</span></button>
+</div>
+<button class="text-center text-primary text-sm font-medium hover:underline mt-1">Write a review</button>
+</div>
+</div>
+<div class="bg-slate-5 dark:bg-transparent rounded-xl p-5 border border-slate-200 dark:border-slate-800">
+<h4 class="text-sm font-bold text-slate-900 dark:text-white mb-4 uppercase tracking-wider">Book Details</h4>
+<div class="flex flex-col gap-3">
+<div class="flex justify-between text-sm">
+<span class="text-slate-500 dark:text-slate-400">Format</span>
+<span class="font-medium text-slate-900 dark:text-white">Hardcover</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-slate-500 dark:text-slate-400">Pages</span>
+<span class="font-medium text-slate-900 dark:text-white">662</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-slate-500 dark:text-slate-400">Language</span>
+<span class="font-medium text-slate-900 dark:text-white">English</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-slate-500 dark:text-slate-400">ISBN</span>
+<span class="font-medium text-slate-900 dark:text-white">978-0756404741</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-slate-500 dark:text-slate-400">Publisher</span>
+<span class="font-medium text-slate-900 dark:text-white">Fanucci</span>
+</div>
+</div>
+</div>
+<div>
+<h4 class="text-sm font-bold text-slate-900 dark:text-white mb-4 uppercase tracking-wider">You Might Also Like</h4>
+<div class="grid grid-cols-3 gap-3">
+<div class="aspect-[2/3] rounded bg-slate-200 dark:bg-surface-dark bg-cover bg-center cursor-pointer hover:opacity-80 transition-opacity" data-alt="Cover of similar fantasy book" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB_LsFFaO9_6kN7BAxW7_bUQHTrjpEYbggl1M5V5vpWgnW3snygrAjQqzJZF_kVdfx2vt6rxnC98i5vCH0tePM_PSSr53Mbn1o9umVheJLzzBw_aJZ9cJS1_yUGrPZTiaD6yKEc-cQ0FqB22XCFHN9PSDcFJSxg_m3AG5hH_ZPfViXou7r1WJlZTcEUdLdj-NZiNl3Z-0SAtMBiOPs9kyDUhXKW29bCuw58fZ_TK_Ylr8qH24n7Ar-YwQerkb-0cDe7tHCr8lv8Drg");'></div>
+<div class="aspect-[2/3] rounded bg-slate-200 dark:bg-surface-dark bg-cover bg-center cursor-pointer hover:opacity-80 transition-opacity" data-alt="Cover of similar fantasy book" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDPPvnK5Ld9J9DythgvMpiNirG0dKB9tW7JgzQ4Aa_UGz7vvdUW-xHnOZFqvuL3tOAHoz325SDJMbq4cNszoYYny-UJtvMFXwB1ZaLq3bJqPAxWauxt-JX6wjxNrgv93ZpqwrIvnBObnV19QNLb9p1A7ReaUM0wtJhj0kt0y9x4RRtpD8M1MGV7UBFIdXerpRP4auadCJlilYgAtGHHekwiBD-zI1rhp4Lu4LuYcW41uy1DEJsf_7xSOtN7jylMa1TXWietng4UwPE");'></div>
+<div class="aspect-[2/3] rounded bg-slate-200 dark:bg-surface-dark bg-cover bg-center cursor-pointer hover:opacity-80 transition-opacity" data-alt="Cover of similar fantasy book" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC2S9IipnsAtJQ9V5HShLXTszqIm9S__U3kh749EEk0OGPNCawQhR1RAweujHhMC9JaRUqfpFHEY33thVhFVLGZyYHfOaEZJxXT7l_9yDoazO1UglXXZfMmEcWvnIzoPzSwvJCXicgX96KVuXPYlYQ-1gEHVyhZltWNhxJnaAKZwjxV5aK4GSykVRVBE0R148hlGYF3p9V9gWIJ-EeRDsAoHaw_bQNzVStbIDfO8veXpWGpHxi1CryNVjNMHgXr4XDcw6yO6CGhWoY");'></div>
+</div>
+</div>
+</aside>
+</div>
+</div>
+</main>
+<div class="h-20"></div>
+</body></html>

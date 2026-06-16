@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RESTory Admin - User Profile Management</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1e293b",
+                        "text-main": "#0d121b",
+                        "text-sub": "#4c669a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.375rem", // rounded-md approx
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main dark:text-white antialiased font-display transition-colors duration-200">
+<div class="flex h-screen w-full overflow-hidden">
+<aside class="w-64 flex-shrink-0 flex flex-col bg-surface-light dark:bg-surface-dark border-r border-slate-200 dark:border-slate-800 transition-colors duration-200 hidden lg:flex">
+<div class="h-16 flex items-center px-6 border-b border-slate-100 dark:border-slate-800 gap-3">
+<div class="size-8 rounded-lg bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[20px]">auto_stories</span>
+</div>
+<h1 class="text-lg font-bold tracking-tight text-slate-900 dark:text-white">RESTory Admin</h1>
+</div>
+<div class="flex-1 overflow-y-auto py-6 px-3 flex flex-col gap-6">
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" style="font-size: 24px;">pie_chart</span>
+<span class="font-medium text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" style="font-size: 24px;">book_2</span>
+<span class="font-medium text-sm">Books</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary dark:text-primary dark:bg-primary/20" href="#">
+<span class="material-symbols-outlined fill-current" style="font-size: 24px; font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-medium text-sm">Users</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" style="font-size: 24px;">star</span>
+<span class="font-medium text-sm">Reviews</span>
+</a>
+</nav>
+<div class="h-px bg-slate-200 dark:bg-slate-700 mx-3"></div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" style="font-size: 24px;">settings</span>
+<span class="font-medium text-sm">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-red-500 transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-red-500 transition-colors" style="font-size: 24px;">logout</span>
+<span class="font-medium text-sm">Logout</span>
+</a>
+</nav>
+</div>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-cover bg-center border border-slate-200 dark:border-slate-700" data-alt="Admin profile picture" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB_tMcvt8AEUOw1wBiwsh22KUhjY8ZWUtbLuU0-fT0Zhzj2dFCHnoyq0iLFA3yGBVJGcVEw6LS7M4tcrgRxIuIdrTgfgXomcLqTHWJ15WYgZX906uF_Bsl3A-GDqvLw1V8tufRbhGSbvo51h15D563U3Jw-RfFVwlqhjwGcbwyjt3DSY_Hww4X0u_rIV7P2qk5hP_As4lEVAt0Cdgry61giMMTiGlnSpn86G3HLD2MSDr8upooUCtLHN2RSGLJm4L4dXrIspgaBt-U');"></div>
+<div class="flex flex-col">
+<span class="text-sm font-bold text-slate-900 dark:text-white">Admin User</span>
+<span class="text-xs text-slate-500 dark:text-slate-400">admin@restory.com</span>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-full overflow-hidden bg-background-light dark:bg-background-dark relative">
+<div class="lg:hidden flex items-center justify-between p-4 bg-surface-light dark:bg-surface-dark border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">auto_stories</span>
+<span class="font-bold text-slate-900 dark:text-white">RESTory</span>
+</div>
+<button class="text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-4 md:p-8">
+<div class="max-w-7xl mx-auto flex flex-col gap-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="flex flex-col gap-1">
+<h2 class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight">User Profile Management</h2>
+<p class="text-slate-500 dark:text-slate-400 text-base">View, manage, and monitor all registered users.</p>
+</div>
+<button class="flex items-center justify-center gap-2 bg-primary hover:bg-blue-700 text-white font-semibold py-2.5 px-5 rounded-lg transition-all shadow-sm shadow-blue-500/20 active:scale-95">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>Add User</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col gap-2">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Total Users</p>
+<div class="flex items-end justify-between">
+<span class="text-3xl font-bold text-slate-900 dark:text-white">12,450</span>
+<div class="flex items-center text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-0.5 rounded text-sm font-medium">
+<span class="material-symbols-outlined text-[16px] mr-1">trending_up</span>
+                                +12%
+                            </div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col gap-2">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Suspended/Banned Users</p>
+<div class="flex items-end justify-between">
+<span class="text-3xl font-bold text-slate-900 dark:text-white">45</span>
+<div class="flex items-center text-red-600 bg-red-50 dark:bg-red-900/20 px-2 py-0.5 rounded text-sm font-medium">
+<span class="material-symbols-outlined text-[16px] mr-1">trending_down</span>
+                                -2%
+                            </div>
+</div>
+</div>
+</div>
+<div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 bg-surface-light dark:bg-surface-dark p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+<div class="relative w-full lg:max-w-md">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2.5 border border-slate-300 dark:border-slate-600 rounded-lg leading-5 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm" placeholder="Search by name, email or ID..." type="text"/>
+</div>
+<div class="flex flex-wrap gap-2 w-full lg:w-auto">
+<button class="px-4 py-1.5 rounded-full text-sm font-medium bg-slate-900 dark:bg-white text-white dark:text-slate-900 transition-colors">
+                            All
+                        </button>
+<button class="px-4 py-1.5 rounded-full text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                            Administrators
+                        </button>
+<button class="px-4 py-1.5 rounded-full text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                            Standard Users
+                        </button>
+<button class="ml-auto lg:ml-2 px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 flex items-center gap-2 text-sm font-medium">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+                            Filters
+                        </button>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
+<thead class="bg-slate-50 dark:bg-slate-800/50">
+<tr>
+<th class="px-6 py-4 text-left" scope="col">
+<div class="flex items-center">
+<input class="h-4 w-4 text-primary focus:ring-primary border-slate-300 rounded" type="checkbox"/>
+</div>
+</th>
+<th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider" scope="col">User</th>
+<th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider" scope="col">Role</th>
+<th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider" scope="col">Status</th>
+<th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider" scope="col">Books Read</th>
+<th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider" scope="col">Last Login</th>
+<th class="relative px-6 py-3" scope="col">
+<span class="sr-only">Actions</span>
+</th>
+</tr>
+</thead>
+<tbody class="bg-surface-light dark:bg-surface-dark divide-y divide-slate-200 dark:divide-slate-700">
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<input class="h-4 w-4 text-primary focus:ring-primary border-slate-300 rounded" type="checkbox"/>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="flex-shrink-0 h-10 w-10">
+<img class="h-10 w-10 rounded-full object-cover" data-alt="User avatar for Marco Rossi" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBM3IY54kG-wNxHe2mIAHgqqmX7QuMJ2LXT5soFf7FSPG3rdpyPm--KCWaBeqNvnAihx3kut0-JKD97-2ep66OvpEa6WUz2uHp1OVuKPJEVgGODTzcyo2bGZMjiihMPpqD-X6Mhd6XKSHxGccF7XGFuqQT-mVhlWkBZItItzZUTwOEwphmiIRmrid3NcDI7DQVMAKiHklIZbpYpvZsJdknHO652QESkg3B9lgjsdItexU-zLBE9iZhrP1HVN1SgEbdq895G_UaI-P8"/>
+</div>
+<div class="ml-4">
+<div class="text-sm font-medium text-slate-900 dark:text-white">Marco Rossi</div>
+<div class="text-sm text-slate-500 dark:text-slate-400">marco.rossi@example.com</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300">
+                                                Admin
+                                            </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300">
+<span class="size-1.5 rounded-full bg-emerald-500"></span>
+                                                Active
+                                            </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-slate-400">menu_book</span>
+                                        124
+                                    </div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+                                    2 hours ago
+                                </td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-slate-400 hover:text-primary transition-colors p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-700">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-slate-400 hover:text-red-500 transition-colors p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-700">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<input class="h-4 w-4 text-primary focus:ring-primary border-slate-300 rounded" type="checkbox"/>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="flex-shrink-0 h-10 w-10">
+<img class="h-10 w-10 rounded-full object-cover" data-alt="User avatar for Matteo Neri" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDo9QNJCqTVqk1P-WlBmxUG3WUcpwuXejuwUw_mM0e2aR85ebLxwoS4zgDB0VTTyiElY9QF1LACbCD9-P4K6nu1PwyATuupUVY1-qEELSs61D_1HUexozPTVGGgZqAF_STpqXpv9YODObBjjdV0MF0ddXI1LiVtHwjlfWYSOn06EWhoCiXwqezeVH3Fz-UkSUZk8YsBjeMBt44IvvVEjq8gxMOTtPmADHaDdY0JzH40N4OEfhsLc6iu7SAOiIzuzDVH1bcBfWW6ADI"/>
+</div>
+<div class="ml-4">
+<div class="text-sm font-medium text-slate-900 dark:text-white">Matteo Neri</div>
+<div class="text-sm text-slate-500 dark:text-slate-400">matteo.n@banned.com</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-slate-300">
+                                                User
+                                            </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300">
+<span class="size-1.5 rounded-full bg-red-500"></span>
+                                                Banned
+                                            </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-slate-400">menu_book</span>
+                                        5
+                                    </div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+                                    30 days ago
+                                </td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-slate-400 hover:text-primary transition-colors p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-700">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-slate-400 hover:text-red-500 transition-colors p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-700">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<input class="h-4 w-4 text-primary focus:ring-primary border-slate-300 rounded" type="checkbox"/>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="flex-shrink-0 h-10 w-10">
+<img class="h-10 w-10 rounded-full object-cover" data-alt="User avatar for Sofia Gialli" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5MKL-ciACP7ThhcbFnacSwRZ63OwY6m6dMRyk2HO3QXh60dKvlcvEyNXOvzxFDWXw4lLeOE18PiHNhgIhKVWhah9AXX7hNnXiwSy-jnQwi6oAkou2sGEpO25ggMRY0oodVbRhF1IwjlDQcEC2-Hr-C669uMxfDwpitiL57PPfkTlGzHD9-9sSL1fkbxX9dPpoBM5m5AgAjJLrgCxmiCEgTkd6reiC9WiVv0GHeB1gJ-dZbyB_wIKVICNNYPi8Vhi85eZ3_O7bjzw"/>
+</div>
+<div class="ml-4">
+<div class="text-sm font-medium text-slate-900 dark:text-white">Sofia Gialli</div>
+<div class="text-sm text-slate-500 dark:text-slate-400">sofia.g@example.com</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-slate-300">
+                                                User
+                                            </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300">
+<span class="size-1.5 rounded-full bg-emerald-500"></span>
+                                                Active
+                                            </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-slate-400">menu_book</span>
+                                        18
+                                    </div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+                                    5 mins ago
+                                </td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-slate-400 hover:text-primary transition-colors p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-700">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-slate-400 hover:text-red-500 transition-colors p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-700">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<input class="h-4 w-4 text-primary focus:ring-primary border-slate-300 rounded" type="checkbox"/>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="flex-shrink-0 h-10 w-10">
+<span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300 font-bold">LG</span>
+</div>
+<div class="ml-4">
+<div class="text-sm font-medium text-slate-900 dark:text-white">Lucas Grey</div>
+<div class="text-sm text-slate-500 dark:text-slate-400">lucas.grey@example.com</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-slate-300">
+                                                User
+                                            </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300">
+<span class="size-1.5 rounded-full bg-emerald-500"></span>
+                                                Active
+                                            </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-slate-400">menu_book</span>
+                                        42
+                                    </div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+                                    4 hours ago
+                                </td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-slate-400 hover:text-primary transition-colors p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-700">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-slate-400 hover:text-red-500 transition-colors p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-700">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<input class="h-4 w-4 text-primary focus:ring-primary border-slate-300 rounded" type="checkbox"/>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="flex-shrink-0 h-10 w-10">
+<span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 font-bold">AS</span>
+</div>
+<div class="ml-4">
+<div class="text-sm font-medium text-slate-900 dark:text-white">Alice Smith</div>
+<div class="text-sm text-slate-500 dark:text-slate-400">alice.smith@example.com</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300">
+                                                Admin
+                                            </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300">
+<span class="size-1.5 rounded-full bg-emerald-500"></span>
+                                                Active
+                                            </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-slate-400">menu_book</span>
+                                        234
+                                    </div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+                                    Just now
+                                </td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-slate-400 hover:text-primary transition-colors p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-700">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-slate-400 hover:text-red-500 transition-colors p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-700">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark px-4 py-3 flex items-center justify-between border-t border-slate-200 dark:border-slate-700 sm:px-6">
+<div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+<div>
+<p class="text-sm text-slate-700 dark:text-slate-300">
+                                    Showing <span class="font-medium">1</span> to <span class="font-medium">5</span> of <span class="font-medium">95</span> results
+                                </p>
+</div>
+<div>
+<nav aria-label="Pagination" class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px">
+<a class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700" href="#">
+<span class="sr-only">Previous</span>
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+</a>
+<a aria-current="page" class="z-10 bg-primary/10 border-primary text-primary relative inline-flex items-center px-4 py-2 border text-sm font-medium" href="#">
+                                        1
+                                    </a>
+<a class="bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-600 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 relative inline-flex items-center px-4 py-2 border text-sm font-medium" href="#">
+                                        2
+                                    </a>
+<a class="bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-600 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 relative inline-flex items-center px-4 py-2 border text-sm font-medium" href="#">
+                                        3
+                                    </a>
+<span class="relative inline-flex items-center px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-sm font-medium text-slate-700 dark:text-slate-300">
+                                        ...
+                                    </span>
+<a class="bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-600 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 relative inline-flex items-center px-4 py-2 border text-sm font-medium" href="#">
+                                        10
+                                    </a>
+<a class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700" href="#">
+<span class="sr-only">Next</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</a>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

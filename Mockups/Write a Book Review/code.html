@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Add Review - RESTory</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "card-dark": "#192233",
+                        "input-dark": "#232f48",
+                        "text-secondary": "#92a4c9"
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "Noto Sans", "sans-serif"],
+                        "body": ["Plus Jakarta Sans", "Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for dark theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111722; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #232f48; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #324467; 
+        }
+        
+        /* Material Symbols sizing helper */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 24px; 
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white min-h-screen flex flex-col overflow-x-hidden antialiased">
+<!-- Top Navigation -->
+<div class="w-full bg-[#111722] border-b border-solid border-b-[#232f48]">
+<div class="layout-container flex justify-center w-full">
+<div class="layout-content-container flex flex-col w-full max-w-[960px]">
+<header class="flex items-center justify-between whitespace-nowrap px-4 sm:px-10 py-3">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-white cursor-pointer">
+<span class="material-symbols-outlined text-primary text-3xl">auto_stories</span>
+<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">RESTory</h2>
+</div>
+<label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full group focus-within:ring-2 ring-primary/50 transition-all">
+<div class="text-[#92a4c9] flex border-none bg-[#232f48] items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#232f48] focus:border-none h-full placeholder:text-[#92a4c9] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" placeholder="Search books..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<div class="hidden md:flex items-center gap-9">
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Home</a>
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">My Books</a>
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Community</a>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-[#232f48] cursor-pointer" data-alt="User profile picture placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB6f89DVilrCFqYxkrcMo7_DdGhr6w_KwS54im6jRCot6E96fNwM3jzzXk_b6wai5J67IMmQ4xlUtV8_VVe0X95EeklLBJ2xQ7B8a5pW2u8N2txRPc0O1b6bfQQn0XRF4EfINXhTO5HBneRdDt2Ni2wE5m44nFlupLub_r9SJsQr7SAeCgjHbwsBVlUPafoe2TumepchCiPyVQhvMpI7IyA7AGS3LndUKj0gg55vR13t1DKhkjtDdsgQaT1gjsK1GRiK6iEflCfScg");'></div>
+</div>
+</header>
+</div>
+</div>
+</div>
+<!-- Main Content Area -->
+<main class="flex-1 flex justify-center py-8 px-4 sm:px-6">
+<div class="w-full max-w-[800px] flex flex-col gap-6">
+<!-- Page Heading -->
+<div class="flex flex-wrap justify-between items-center gap-3">
+<p class="text-white tracking-light text-[32px] font-bold leading-tight">Write a Review</p>
+<button class="md:hidden text-text-secondary">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Content Card -->
+<div class="bg-card-dark rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.25)] border border-[#232f48] p-6 sm:p-8 flex flex-col gap-8">
+<!-- Book Info Section -->
+<div class="flex items-start gap-5 pb-6 border-b border-[#232f48]">
+<div class="w-20 sm:w-24 shrink-0 rounded-lg overflow-hidden shadow-lg" data-alt="Cover of the book The Great Gatsby" style="aspect-ratio: 2/3;">
+<img alt="Cover of the book The Great Gatsby" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiupsxETSd8VBx0jftxJ7zBZTFdhP7RV7CmADwtxUa88XVmay0rVk_ms6HV4uWVySHjztVNtf4F1J_cuSp_Q-aM5EuNLdzusdpe3BVStO_rDAls6kDuKsX05kX-rdxpm6kd1aenzBBtrPZoGOhbUw7bMoGYVU1jJy-hWUFx0mBRk5HFcZrdjTHbdzSi766xu8rxyQhPLUHGbrEu7Fv2g61WHUNmua15OuQNFrEWFRMQW8bs5zTHiXK4krA9_NMA18GWCWKB8PYd-s"/>
+</div>
+<div class="flex flex-col gap-2 pt-1">
+<div>
+<h3 class="text-xl sm:text-2xl font-bold text-white leading-tight">The Great Gatsby</h3>
+<p class="text-text-secondary text-base font-medium">by F. Scott Fitzgerald</p>
+</div>
+<div class="flex items-center gap-2 mt-1">
+<span class="px-2 py-0.5 rounded bg-green-500/10 text-green-400 text-xs font-bold uppercase tracking-wider border border-green-500/20">Read</span>
+<span class="text-xs text-text-secondary">• Finished Oct 24, 2023</span>
+</div>
+</div>
+</div>
+<!-- Rating Section -->
+<div class="flex flex-col gap-4">
+<label class="text-white text-lg font-bold leading-tight">How would you rate this?</label>
+<div class="flex items-center gap-2 group cursor-pointer w-fit">
+<!-- Interactive star look - 4 filled 1 empty -->
+<span class="material-symbols-outlined filled text-primary text-4xl hover:scale-110 transition-transform">star</span>
+<span class="material-symbols-outlined filled text-primary text-4xl hover:scale-110 transition-transform">star</span>
+<span class="material-symbols-outlined filled text-primary text-4xl hover:scale-110 transition-transform">star</span>
+<span class="material-symbols-outlined filled text-primary text-4xl hover:scale-110 transition-transform">star</span>
+<span class="material-symbols-outlined text-[#324467] text-4xl hover:text-primary hover:scale-110 transition-all">star</span>
+<span class="ml-3 text-lg font-medium text-white">4.0</span>
+</div>
+</div>
+<!-- Review Text Section -->
+<div class="flex flex-col gap-3">
+<label class="text-white text-base font-bold" for="review-text">Your Review</label>
+<div class="relative">
+<textarea class="w-full h-48 bg-input-dark border border-[#324467] rounded-lg p-4 text-white placeholder:text-text-secondary focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none resize-y text-base leading-relaxed transition-colors" id="review-text" placeholder="What did you think? Was it a page turner? (Optional)"></textarea>
+<div class="absolute bottom-3 right-3 text-xs text-text-secondary font-medium">0/2000</div>
+</div>
+</div>
+<!-- Metadata Controls -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+<!-- Date Picker -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-medium text-text-secondary">Date Finished</label>
+<div class="relative flex items-center">
+<div class="absolute left-3 text-text-secondary pointer-events-none flex items-center">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+</div>
+<input class="w-full bg-input-dark border border-[#324467] rounded-lg py-2.5 pl-10 pr-4 text-white focus:border-primary focus:ring-0 focus:outline-none cursor-pointer" type="date" value="2023-10-24"/>
+</div>
+</div>
+<!-- Privacy -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-medium text-text-secondary">Who can see this?</label>
+<div class="relative">
+<select class="w-full bg-input-dark border border-[#324467] rounded-lg py-2.5 pl-4 pr-10 text-white focus:border-primary focus:ring-0 focus:outline-none appearance-none cursor-pointer">
+<option>Public (Everyone)</option>
+<option>Friends Only</option>
+<option>Private (Only Me)</option>
+</select>
+<div class="absolute right-3 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none flex items-center">
+<span class="material-symbols-outlined text-[24px]">arrow_drop_down</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Toggles Row -->
+<div class="flex items-center gap-3 py-2">
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="relative inline-block w-12 h-6 rounded-full bg-[#324467] transition-colors duration-200 ease-in-out group-hover:bg-[#435780]">
+<input class="peer sr-only" type="checkbox"/>
+<span class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform duration-200 ease-in-out peer-checked:translate-x-6 peer-checked:bg-white"></span>
+<!-- Creating a visual checked state just for the design without JS -->
+</div>
+<span class="text-sm font-medium text-white select-none">This review contains spoilers</span>
+</label>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col-reverse sm:flex-row items-center justify-end gap-4 pt-4 border-t border-[#232f48]">
+<button class="w-full sm:w-auto px-6 py-2.5 rounded-lg text-sm font-bold text-text-secondary hover:text-white hover:bg-[#232f48] transition-colors">
+                        Cancel
+                    </button>
+<button class="w-full sm:w-auto px-8 py-2.5 rounded-lg bg-primary hover:bg-blue-600 text-white text-sm font-bold shadow-lg shadow-blue-900/20 transition-all transform hover:-translate-y-0.5 active:translate-y-0">
+                        Publish Review
+                    </button>
+</div>
+</div>
+</div>
+</main>
+</body></html>
